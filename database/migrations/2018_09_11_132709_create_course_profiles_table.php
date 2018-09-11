@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCollegeProfilesTable extends Migration
+class CreateCourseProfilesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,17 @@ class CreateCollegeProfilesTable extends Migration
      */
     public function up()
     {
-        Schema::create('college_profiles', function (Blueprint $table) {
+        Schema::create('course_profiles', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('college_id');
-            $table->foreign('college_id')
+            $table->foreign('course_id')
                 ->references('id')
-                ->on('colleges')
+                ->on('courses')
                 ->onDelete('cascade');
-            $table->text('college_description')->nullable();
-            $table->dateTime('date_founded')->nullable();;
+            $table->string('course_description')->nullable();
+            $table->bigInteger('course_credits')->nullable();
+            $table->text('course_qualifications');
+            $table->string('course_duration');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -34,6 +34,6 @@ class CreateCollegeProfilesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('college_profiles');
+        Schema::dropIfExists('course_profiles');
     }
 }

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Models\Intake;
+namespace App\Model\Intakes;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Intake extends Model
+class Intakes extends Model
 {
     //
 }
