@@ -16,3 +16,10 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+Route::get('/colleges', 'Colleges\CollegesController@index');
+Route::get('/colleges/{id}', 'Colleges\CollegesController@show');
+Route::post('/colleges', 'Colleges\CollegesController@store');
+Route::put('/colleges/{id}', 'Colleges\CollegesController@update');
+Route::delete('/colleges/{id}', 'Colleges\CollegesController@destroy');

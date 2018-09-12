@@ -16,10 +16,6 @@ class CreateFacilitiesTable extends Migration
         Schema::create('facilities', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('college_id');
-            $table->foreign('college_id')
-                ->references('id')
-                ->on('colleges')
-                ->onDelete('cascade');
             $table->string('facility_name');
             $table->text('facility_description')->nullable();
             $table->bigInteger('credits')->nullable();

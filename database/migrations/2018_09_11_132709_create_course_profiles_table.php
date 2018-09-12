@@ -15,11 +15,8 @@ class CreateCourseProfilesTable extends Migration
     {
         Schema::create('course_profiles', function (Blueprint $table) {
             $table->increments('id');
-            $table->foreign('course_id')
-                ->references('id')
-                ->on('courses')
-                ->onDelete('cascade');
-            $table->string('course_description')->nullable();
+            $table->unsignedInteger('course_id');
+            $table->text('course_description')->nullable();
             $table->bigInteger('course_credits')->nullable();
             $table->text('course_qualifications');
             $table->string('course_duration');

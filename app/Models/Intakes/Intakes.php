@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Model\Intakes;
+namespace App\Models\Intakes;
 
 use Illuminate\Database\Eloquent\Model;
 

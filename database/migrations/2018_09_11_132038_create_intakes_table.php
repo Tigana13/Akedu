@@ -16,19 +16,10 @@ class CreateIntakesTable extends Migration
         Schema::create('intakes', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('college_id');
-            $table->foreign('college_id')
-                ->references('id')
-                ->on('colleges')
-                ->onDelete('cascade');
-            $table->unsignedInteger('course_id');
-            $table->foreign('course_id')
-                ->references('id')
-                ->on('courses')
-                ->onDelete('cascade');
             $table->string('intake_alias')->nullable();
             $table->text('intake_description')->nullable();
-            $table->dateTime('intake_start');
-            $table->dateTime('intake_finish');
+            $table->string('intake_start');
+            $table->string('intake_finish');
             $table->timestamps();
         });
     }

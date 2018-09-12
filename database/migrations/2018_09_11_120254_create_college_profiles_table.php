@@ -15,11 +15,7 @@ class CreateCollegeProfilesTable extends Migration
     {
         Schema::create('college_profiles', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('college_id');
-            $table->foreign('college_id')
-                ->references('id')
-                ->on('colleges')
-                ->onDelete('cascade');
+            $table->unsignedInteger('college_id');
             $table->text('college_description')->nullable();
             $table->dateTime('date_founded')->nullable();;
             $table->timestamps();
