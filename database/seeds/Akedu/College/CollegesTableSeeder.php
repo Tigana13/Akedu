@@ -69,7 +69,7 @@ class CollegesTableSeeder extends Seeder
 
             //Create the locatable
             Locatable::create([
-                'location_id' => $location->id,
+                'locations_id' => $location->id,
                 'locatable_type' => $this->locatable_type,
                 'locatable_id' => $college_id
             ]);

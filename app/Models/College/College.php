@@ -2,12 +2,13 @@
 
 namespace App\Models\College;
 
-use App\Model\Locations\Locations;
 use App\Models\College\Profile\CollegeProfile;
 use App\Models\Course\Course;
 use App\Models\Facility\Facility;
 use App\Models\Intakes\Intakes;
+use App\Models\Locations\Locations;
 use Illuminate\Database\Eloquent\Model;
+use TCG\Voyager\Models\Category;
 
 class College extends Model
 {
@@ -35,4 +36,5 @@ class College extends Model
     {
         return $this->morphToMany(Locations::class, 'locatable');
     }
+
 }

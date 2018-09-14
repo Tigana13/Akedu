@@ -41,6 +41,11 @@ return [
             'provider' => 'users',
         ],
 
+        'college' => [
+            'driver' => 'session',
+            'provider' => 'colleges',
+        ],
+
         'api' => [
             'driver' => 'token',
             'provider' => 'users',
@@ -68,6 +73,10 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\User::class,
+        ],
+        'colleges' => [
+            'driver' => 'eloquent',
+            'model' => \App\Models\College\College::class,
         ],
 
         // 'users' => [

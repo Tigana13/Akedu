@@ -3,6 +3,7 @@
 namespace App\Http\Resources\Colleges;
 
 use App\Http\Resources\Courses\CoursesResource;
+use App\Http\Resources\Locations\LocationsResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class CollegesResource extends JsonResource
@@ -16,11 +17,15 @@ class CollegesResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
             'college_name' => $this->college_name,
             'college_email' => $this->college_email,
-            'courses' => CoursesResource::collection($this->whenLoaded('courses')),
             'active' => $this->active,
-            'certified' => $this->certified
+            'certified' => $this->certified,
+            'branches' => LocationsResource::collection($this->whenLoaded('locations')),
+            'courses' => CoursesResource::collection($this->whenLoaded('courses')),
+            'facilities' => CoursesResource::collection($this->whenLoaded('facilities')),
+            'intakes' => CoursesResource::collection($this->whenLoaded('intakes')),
         ];
     }
 

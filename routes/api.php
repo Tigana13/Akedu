@@ -18,8 +18,16 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-Route::get('/colleges', 'Colleges\CollegesController@index');
-Route::get('/colleges/{id}', 'Colleges\CollegesController@show');
-Route::post('/colleges', 'Colleges\CollegesController@store');
-Route::put('/colleges/{id}', 'Colleges\CollegesController@update');
-Route::delete('/colleges/{id}', 'Colleges\CollegesController@destroy');
+Route::get('/colleges', 'API\Colleges\CollegesController@index');
+Route::get('/colleges/{id}', 'API\Colleges\CollegesController@show');
+Route::post('/colleges', 'API\Colleges\CollegesController@store');
+Route::put('/colleges/{id}', 'API\Colleges\CollegesController@update');
+Route::delete('/colleges/{id}', 'API\Colleges\CollegesController@destroy');
+Route::get('/colleges/related/{relation}', 'API\Colleges\CollegesController@relation');
+
+
+Route::get('/courses', 'API\Courses\CoursesController@index');
+Route::get('/courses/{id}', 'API\Courses\CoursesController@show');
+Route::post('/courses', 'API\Courses\CoursesController@store');
+Route::put('/courses/{id}', 'API\Courses\CoursesController@update');
+Route::delete('/courses/{id}', 'API\Courses\CoursesController@destroy');

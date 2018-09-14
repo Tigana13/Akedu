@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Colleges;
+namespace App\Http\Controllers\API\Courses;
 
-use App\Http\Resources\Colleges\CollegesResource;
-use App\Models\College\College;
+use App\Http\Resources\Courses\CoursesResource;
+use App\Models\Course\Course;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class CollegesController extends Controller
+class CoursesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +16,9 @@ class CollegesController extends Controller
      */
     public function index()
     {
-        $colleges = College::paginate(15);
+        $courses = Course::with(['college', 'intakes'])->paginate(10);
 
-        return CollegesResource::collection($colleges);
+        return CoursesResource::collection($courses);
     }
 
     /**
@@ -35,17 +35,20 @@ class CollegesController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return CollegesResource
+     * @return CoursesResource
      */
     public function store(Request $request)
     {
-        $college = $request->isMethod('put') ? College::findOrFail($request->college_id) : new College();
+        $course = $request->isMethod('put') ? Course::findOrFail($request->course_id) : new Course();
 
-        $college->college_name = $request->college_name;
-        $college->college_email = $request->college_email;
+        $course->course_name = $request->course_name;
+        $course->college_id = $request->college_id;
+        $course->course_intake = $request->course_intake;
+        $course->active = 0;
+        $course->certified = 0;
 
-        if ($college->save()){
-            return new CollegesResource($college);
+        if ($course->save()){
+            return new CoursesResource($course);
         }
     }
 
@@ -53,13 +56,13 @@ class CollegesController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return CollegesResource
+     * @return CoursesResource
      */
     public function show($id)
     {
-        $college = College::findOrFail($id);
+        $course = Course::findOrFail($id);
 
-        return new CollegesResource($college);
+        return new CoursesResource($course);
     }
 
     /**
@@ -89,14 +92,14 @@ class CollegesController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return CollegesResource
+     * @return CoursesResource
      */
     public function destroy($id)
     {
-        $college = College::findOrFail($id);
+        $course = Course::findOrFail($id);
 
-        if ($college->delete()){
-            return new CollegesResource($college);
+        if ($course->delete()){
+            return new CoursesResource($course);
         }
     }
 }
