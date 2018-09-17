@@ -22,8 +22,12 @@ class Course extends Model
         return $this->hasMany(Intakes::class, 'id', 'course_intake');
     }
 
-    public function college()
+    /**
+     * Get all of the colleges that are associated with this course.
+     */
+    public function colleges()
     {
-        return $this->belongsTo(College::class, 'college_id');
+        return $this->morphedByMany(College::class, 'courseable');
     }
+
 }

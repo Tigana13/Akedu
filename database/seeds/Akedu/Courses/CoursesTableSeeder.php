@@ -7,12 +7,14 @@ class CoursesTableSeeder extends Seeder
     protected $_faker;
     protected $colleges;
     protected $intakes;
+    protected $coursable_type;
 
     public function __construct()
     {
         $this->_faker = Faker\Factory::create();
         $this->colleges = \App\Models\College\College::all();
         $this->intakes = \App\Models\Intakes\Intakes::all();
+        $this->coursable_type = \App\Models\College\College::class;
     }
     /**
      * Run the database seeds.
@@ -21,10 +23,11 @@ class CoursesTableSeeder extends Seeder
      */
     public function run()
     {
-        for ($i = 0; $i < 40; $i++){
+        $i = 0;
+
+        while ($i < 15){
             $course = \App\Models\Course\Course::create([
-                'course_name' => (rand(0,1)) ? 'Degree in ': 'Diploma in '.$this->_faker->word,
-                'college_id' => $this->colleges->random()->id,
+                'course_name' => ((rand(0,1)) ? 'Degree in ': 'Diploma in ').$this->_faker->word,
                 'course_intake' => $this->intakes->random()->id,
                 'active' => $this->_faker->boolean,
                 'certified' => $this->_faker->boolean
@@ -39,6 +42,20 @@ class CoursesTableSeeder extends Seeder
             ]);
 
             $course->profile()->save($course_profile);
+
+            //Create the coursables
+            $x = 0;
+            while ($x < 4){
+                \App\Models\Course\Courseable::create([
+                    'course_id' => $course->id,
+                    'courseables_type' => $this->coursable_type,
+                    'courseables_id' => $this->colleges->random()->id
+                ]);
+
+                $x++;
+            }
+
+            $i++;
         }
     }
 }

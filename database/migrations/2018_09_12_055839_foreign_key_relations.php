@@ -21,11 +21,6 @@ class ForeignKeyRelations extends Migration
         });
 
         Schema::table('courses', function (Blueprint $table){
-            $table->foreign('college_id')
-                ->references('id')
-                ->on('colleges')
-                ->onDelete('cascade');
-
             $table->foreign('course_intake')
                 ->references('id')
                 ->on('intakes')
@@ -72,7 +67,6 @@ class ForeignKeyRelations extends Migration
         });
 
         Schema::table('courses', function (Blueprint $table){
-            $table->dropForeign('courses_college_id_foreign');
             $table->dropForeign('courses_course_intake_foreign');
         });
 

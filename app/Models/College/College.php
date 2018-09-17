@@ -5,21 +5,16 @@ namespace App\Models\College;
 use App\Models\College\Profile\CollegeProfile;
 use App\Models\Course\Course;
 use App\Models\Facility\Facility;
+use App\Models\Image\Image;
 use App\Models\Intakes\Intakes;
 use App\Models\Locations\Locations;
 use Illuminate\Database\Eloquent\Model;
-use TCG\Voyager\Models\Category;
 
 class College extends Model
 {
     public function profile()
     {
         return $this->hasOne(CollegeProfile::class, 'college_id');
-    }
-
-    public function courses()
-    {
-        return $this->hasMany(Course::class, 'college_id');
     }
 
     public function intakes()
@@ -35,6 +30,17 @@ class College extends Model
     public function locations()
     {
         return $this->morphToMany(Locations::class, 'locatable');
+    }
+
+    //Each college may be tied to one or more courses aps
+    public function courses()
+    {
+        return $this->morphToMany(Course::class, 'courseables');
+    }
+
+    public function images()
+    {
+        return $this->morphToMany(Image::class, 'imageable');
     }
 
 }

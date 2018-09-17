@@ -42,6 +42,7 @@ class CollegesTableSeeder extends Seeder
                 'date_founded' => $faker->date
             ]);
 
+
             $college->profile()->save($college_profile);
 
             //Create Locations (Branches) for the college
@@ -63,6 +64,25 @@ class CollegesTableSeeder extends Seeder
                 'address' => $this->faker->address,
                 'country_id' => $this->countries->random()->id,
                 'city' => $this->faker->city,
+            ]);
+
+            $location->save();
+
+            //Create the locatable
+            Locatable::create([
+                'locations_id' => $location->id,
+                'locatable_type' => $this->locatable_type,
+                'locatable_id' => $college_id
+            ]);
+        }
+    }
+
+    public function createCollegeImages($colleg_id)
+    {
+        //Create random number of branches for the college
+        for ($x = mt_rand(4,10); $x < 6; $x++){
+            $image = \App\Models\Image\Image::create([
+
             ]);
 
             $location->save();
