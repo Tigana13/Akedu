@@ -3,6 +3,7 @@
 namespace App\Http\Resources\Colleges;
 
 use App\Http\Resources\Courses\CoursesResource;
+use App\Http\Resources\Images\ImagesResource;
 use App\Http\Resources\Locations\LocationsResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -26,6 +27,7 @@ class CollegesResource extends JsonResource
             'courses' => CoursesResource::collection($this->whenLoaded('courses')),
             'facilities' => CoursesResource::collection($this->whenLoaded('facilities')),
             'intakes' => CoursesResource::collection($this->whenLoaded('intakes')),
+            'images' => ImagesResource::collection($this->whenLoaded('images'))
         ];
     }
 

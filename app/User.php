@@ -3,12 +3,13 @@
 namespace App;
 
 use App\Models\User\UserProfile;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends \TCG\Voyager\Models\User
 {
-    use Notifiable;
+    use Notifiable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -18,6 +19,19 @@ class User extends \TCG\Voyager\Models\User
     protected $fillable = [
         'name', 'email', 'password',
     ];
+
+    public function searchableAs()
+    {
+        return 'users_index';
+    }
+
+    public function toSearchableArray()
+    {
+
+        $array = ['name', 'email'];
+
+        return $array;
+    }
 
     /**
      * The attributes that should be hidden for arrays.

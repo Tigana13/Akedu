@@ -6,11 +6,27 @@ use App\Models\College\College;
 use App\Models\Course\Profile\CourseProfile;
 use App\Models\Intakes\Intakes;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Laravel\Scout\Searchable;
 
 class Course extends Model
 {
+    use Searchable, SoftDeletes;
+
     protected $fillable = ['course_name', 'college_id', 'course_intake'];
 
+    public function searchableAs()
+    {
+        return 'courses_index';
+    }
+
+    public function toSearchableArray()
+    {
+
+        $array = ['course_name', 'certified'];
+
+        return $array;
+    }
 
     public function profile()
     {

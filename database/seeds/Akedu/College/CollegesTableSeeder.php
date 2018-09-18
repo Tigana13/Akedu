@@ -10,6 +10,7 @@ class CollegesTableSeeder extends Seeder
     protected $locatable_type;
     protected $faker;
     protected $countries;
+    protected $imageable_type;
 
 
     public function __construct()
@@ -17,6 +18,7 @@ class CollegesTableSeeder extends Seeder
         $this->locatable_type = College::class;
         $this->faker = Faker\Factory::create();
         $this->countries = \App\Models\Countries\Countries::all();
+        $this->imageable_type = College::class;
     }
     /**
      * Run the database seeds.
@@ -47,6 +49,12 @@ class CollegesTableSeeder extends Seeder
 
             //Create Locations (Branches) for the college
             $this->createCollegeLocations($college->id);
+
+            //Create Images for the college
+            $this->createCollegeImages($college->id);
+
+            //Create Banner Images for the college
+            $this->createBannerImages($college->id);
         }
 
     }
@@ -77,21 +85,34 @@ class CollegesTableSeeder extends Seeder
         }
     }
 
-    public function createCollegeImages($colleg_id)
+    public function createBannerImages($college_id)
     {
-        //Create random number of branches for the college
-        for ($x = mt_rand(4,10); $x < 6; $x++){
+        for ($x = 0; $x < 2; $x++){
             $image = \App\Models\Image\Image::create([
-
+                'image' => $this->faker->imageUrl(1920,500),
+                'college_id' => $college_id
             ]);
 
-            $location->save();
+            $image->save();
+        }
+    }
+
+
+    public function createCollegeImages($college_id)
+    {
+        //Create random number of branches for the college
+        for ($x = mt_rand(4,15); $x < 20; $x++){
+            $image = \App\Models\Image\Image::create([
+                'image' => $this->faker->imageUrl(500,500)
+            ]);
+
+            $image->save();
 
             //Create the locatable
-            Locatable::create([
-                'locations_id' => $location->id,
-                'locatable_type' => $this->locatable_type,
-                'locatable_id' => $college_id
+            \App\Models\Image\Imageable::create([
+                'image_id' => $image->id,
+                'imageable_type' => $this->imageable_type,
+                'imageable_id' => $college_id
             ]);
         }
     }

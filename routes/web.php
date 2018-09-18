@@ -11,10 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('user.landing');
-});
-
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
@@ -22,6 +18,8 @@ Route::group(['prefix' => 'admin'], function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'College\CollegeController@index')->name('home');
 
-Route::get('/college', 'College\College@index')->name('home');
+Route::get('/colleges', 'College\CollegeController@index')->name('colleges');
+Route::get('/colleges/{id}', 'College\CollegeController@show')->name('college.show');
+Route::post('/search', 'College\CollegeController@search')->name('search');

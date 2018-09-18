@@ -21,6 +21,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/colleges', 'API\Colleges\CollegesController@index');
 Route::get('/colleges/{id}', 'API\Colleges\CollegesController@show');
 Route::post('/colleges', 'API\Colleges\CollegesController@store');
+Route::post('/colleges/search', 'API\Colleges\CollegesController@search');
 Route::put('/colleges/{id}', 'API\Colleges\CollegesController@update');
 Route::delete('/colleges/{id}', 'API\Colleges\CollegesController@destroy');
 Route::get('/colleges/related/{relation}', 'API\Colleges\CollegesController@relation');

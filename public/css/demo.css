@@ -31,13 +31,12 @@ Header 2
   width: 100%;
   z-index: 1;
   left: 0px;
-  padding: 0px 15px; }
+}
   .h2-nav .navbar-nav > .nav-item > .nav-link {
     line-height: 80px; }
   .h2-nav .navbar-nav .nav-item {
     margin: 0 15px; }
     .h2-nav .navbar-nav .nav-item .nav-link {
-      padding: 12px 0px;
       color: #ffffff;
       font-weight: 400; }
     .h2-nav .navbar-nav .nav-item:hover .nav-link {

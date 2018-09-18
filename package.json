@@ -20,6 +20,7 @@
         "vue": "^2.5.7"
     },
     "dependencies": {
+        "google-maps-api-loader": "^1.1.1",
         "npm": "^6.4.1"
     }
 }

@@ -9,9 +9,27 @@ use App\Models\Image\Image;
 use App\Models\Intakes\Intakes;
 use App\Models\Locations\Locations;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Laravel\Scout\Searchable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class College extends Model
+
+class College extends Authenticatable
 {
+    use Searchable, SoftDeletes;
+
+    public function searchableAs()
+    {
+        return 'colleges_index';
+    }
+
+    public function toSearchableArray()
+    {
+        $array = ['college_name'];
+
+        return $array;
+    }
+
     public function profile()
     {
         return $this->hasOne(CollegeProfile::class, 'college_id');

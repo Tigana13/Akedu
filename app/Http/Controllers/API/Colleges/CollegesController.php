@@ -7,6 +7,7 @@ use App\Models\College\College;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class CollegesController extends Controller
 {
@@ -17,7 +18,7 @@ class CollegesController extends Controller
      */
     public function index()
     {
-        $colleges = College::with(['courses', 'facilities', 'intakes', 'locations.country'])->paginate(15);
+        $colleges = College::with(['courses', 'facilities', 'intakes', 'images', 'locations.country'])->paginate(15);
 
         return CollegesResource::collection($colleges);
     }
@@ -109,4 +110,65 @@ class CollegesController extends Controller
             return new CollegesResource($college);
         }
     }
+
+    public function search(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'search_query' => 'nullable|string|max:100'
+        ]);
+
+        if ($validator->fails()){
+            return abort(203);
+        }
+
+        $search_query = $request->search_query;
+
+        $colleges = College::with('courses', 'facilities', 'intakes', 'images', 'locations.country')
+            ->where('college_name', 'like', "%{$search_query}%")
+            ->orWhere('college_email', 'like', "%{$search_query}%")
+            ->orWhereHas('profile', function ($query) use ($search_query){
+                $query->where('college_description', 'like', "%{$search_query}%")
+                    ->orWhere('date_founded', 'like', "%{$search_query}%");
+            })
+            ->orWhereHas('courses', function ($query) use ($search_query){
+                $query->where('course_name', 'like', "%{$search_query}%")
+                    ->orWhere('certified', 'like', "%{$search_query}%");
+            })
+            ->orWhereHas('courses.profile', function ($query) use ($search_query){
+                $query->where('course_description', 'like', "%{$search_query}%")
+                    ->orWhere('course_credits', 'like', "%{$search_query}%")
+                    ->orWhere('course_qualifications', 'like', "%{$search_query}%")
+                    ->orWhere('course_duration', 'like', "%{$search_query}%");
+            })
+            ->orWhereHas('facilities', function ($query) use ($search_query){
+                $query->where('facility_name', 'like', "%{$search_query}%")
+                    ->orWhere('facility_description', 'like', "%{$search_query}%")
+                    ->orWhere('credits', 'like', "%{$search_query}%")
+                    ->orWhere('certified', 'like', "%{$search_query}%");
+            })
+            ->orWhereHas('intakes', function ($query) use ($search_query){
+                $query->where('intake_alias', 'like', "%{$search_query}%")
+                    ->orWhere('intake_description', 'like', "%{$search_query}%")
+                    ->orWhere('intake_start', 'like', "%{$search_query}%")
+                    ->orWhere('intake_finish', 'like', "%{$search_query}%");
+            })
+            ->orWhereHas('locations', function ($query) use ($search_query){
+                $query->where('latitude', 'like', "%{$search_query}%")
+                    ->orWhere('longitude', 'like', "%{$search_query}%")
+                    ->orWhere('address', 'like', "%{$search_query}%")
+                    ->orWhere('city', 'like', "%{$search_query}%");
+            })
+            ->orWhereHas('locations.country', function ($query) use ($search_query){
+                $query->where('country_name', 'like', "%{$search_query}%")
+                    ->orWhere('country_code', 'like', "%{$search_query}%")
+                    ->orWhere('country_extension', 'like', "%{$search_query}%")
+                    ->orWhere('region_code', 'like', "%{$search_query}%")
+                    ->orWhere('continent', 'like', "%{$search_query}%");
+
+            })
+            ->get();
+
+        return CollegesResource::collection($colleges);
+    }
+
 }
