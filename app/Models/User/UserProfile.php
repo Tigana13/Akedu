@@ -21,7 +21,6 @@ class UserProfile extends Model
 
     public function toSearchableArray()
     {
-
         $array = ['dob', 'occupation', 'completion_year'];
 
         return $array;

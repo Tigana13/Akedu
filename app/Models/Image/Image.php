@@ -20,7 +20,6 @@ class Image extends Model
 
     public function toSearchableArray()
     {
-
         $array = ['image'];
 
         return $array;

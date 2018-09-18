@@ -15,6 +15,7 @@
         "laravel/framework": "5.7.*",
         "laravel/scout": "^5.0",
         "laravel/tinker": "^1.0",
+        "symfony/process": "^4.1",
         "tcg/voyager": "^1.1"
     },
     "require-dev": {

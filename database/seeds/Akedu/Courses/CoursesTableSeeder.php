@@ -25,7 +25,7 @@ class CoursesTableSeeder extends Seeder
     {
         $i = 0;
 
-        while ($i < 15){
+        while ($i < 30){
             $course = \App\Models\Course\Course::create([
                 'course_name' => ((rand(0,1)) ? 'Degree in ': 'Diploma in ').$this->_faker->word,
                 'course_intake' => $this->intakes->random()->id,

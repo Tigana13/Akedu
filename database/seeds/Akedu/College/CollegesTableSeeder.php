@@ -29,7 +29,7 @@ class CollegesTableSeeder extends Seeder
     {
         $faker = Faker\Factory::create();
 
-        for ($i=0; $i < 25; $i++) {
+        for ($i=0; $i < 30; $i++) {
             $college = College::create([
                 'college_name' => $faker->word. ' University',
                 'college_email' => $faker->unique()->safeEmail,

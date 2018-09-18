@@ -1,0 +1,29 @@
+<?php
+
+use Illuminate\Database\Seeder;
+
+class InterestsTableSeeder extends Seeder
+{
+    protected $faker;
+
+    public function __construct()
+    {
+        $this->faker = Faker\Factory::create();
+    }
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        $x = 0;
+
+        while ($x  < 20){
+            $interest = \App\Models\Interests\Interests::create([
+                'interest_name' => $this->faker->name,
+                'interest_icon' => $this->faker->imageUrl(200,200)
+            ]);
+        }
+    }
+}
