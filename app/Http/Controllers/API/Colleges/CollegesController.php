@@ -18,7 +18,7 @@ class CollegesController extends Controller
      */
     public function index()
     {
-        $colleges = College::with(['courses', 'facilities', 'intakes', 'images', 'locations.country'])->paginate(15);
+        $colleges = College::with(['courses', 'facilities', 'intakes', 'images', 'locations.country'])->get();
 
         return CollegesResource::collection($colleges);
     }
@@ -26,7 +26,7 @@ class CollegesController extends Controller
 
     public function relation($relation = null)
     {
-        $colleges = College::with($relation)->paginate(15);
+        $colleges = College::with($relation)->get();
 
         return CollegesResource::collection($colleges);
     }

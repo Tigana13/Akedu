@@ -1,3 +1,8 @@
+@php
+$colleges = \App\Models\College\College::all();
+$courses = \App\Models\Course\Course::all();
+
+@endphp
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
 <head>
@@ -55,7 +60,7 @@
                         <div class="collapse navbar-collapse hover-dropdown" id="header2">
                             <ul class="navbar-nav">
                                 <li class="nav-item dropdown mega-dropdown active">
-                                    <a class="nav-link dropdown-toggle" href="#" id="h6-mega-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <a class="nav-link dropdown-toggle" href="{{route('home')}}" id="h6-mega-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Colleges <i class="fa fa-angle-down m-l-5"></i>
                                     </a>
                                     <div class="dropdown-menu b-none font-14 animated fadeInUp" aria-labelledby="h6-mega-dropdown">
@@ -67,26 +72,30 @@
                                             <div class="col-lg-2 col-md-6">
                                                 <ul class="list-style-none">
                                                     <li><h6>Featured</h6></li>
-                                                    <li><a href="../demo-business/index.html" target="_blank">Sample featured</a></li>
+                                                    @foreach($colleges->random(5) as $college)
+                                                        <li><a href="{{route('college.show', $college->id)}}" >{{$college->college_name}}</a></li>
+                                                    @endforeach
                                                 </ul>
                                             </div>
                                             <div class="col-lg-2 col-md-6">
                                                 <ul class="list-style-none">
                                                     <li><h6>Top rated</h6></li>
-                                                    <li><a href="../demo-business/index.html" target="_blank">sample top rated</a></li>
-                                                </ul>
+                                                    @foreach($colleges->random(5) as $college)
+                                                        <li><a href="{{route('college.show', $college->id)}}" >{{$college->college_name}}</a></li>
+                                                    @endforeach                                                </ul>
                                             </div>
                                             <div class="col-lg-2 col-md-6">
                                                 <ul class="list-style-none">
                                                     <li><h6>Recent Additions</h6></li>
-                                                    <li><a href="../demo-business/index.html" target="_blank">sample recent</a></li>
-                                                </ul>
+                                                    @foreach($colleges->random(5) as $college)
+                                                        <li><a href="{{route('college.show', $college->id)}}" >{{$college->college_name}}</a></li>
+                                                    @endforeach                                                </ul>
                                             </div>
                                         </div>
                                     </div>
                                 </li>
                                 <li class="nav-item dropdown mega-dropdown">
-                                    <a class="nav-link dropdown-toggle" href="index.html#" id="h6-mega-dropdown1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <a class="nav-link dropdown-toggle" href="#" id="h6-mega-dropdown1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Courses <i class="fa fa-angle-down m-l-5"></i>
                                     </a>
                                     <div class="dropdown-menu b-none font-14 animated fadeInUp" aria-labelledby="h6-mega-dropdown1">
@@ -98,19 +107,25 @@
                                             <div class="col-lg-2 col-md-6">
                                                 <ul class="list-style-none">
                                                     <li><h6>Featured</h6></li>
-                                                    <li><a href="../demo-business/index.html" target="_blank">Sample featured</a></li>
+                                                    @foreach($courses->random(5) as $course)
+                                                        <li><a href="{{route('course.show', $course->id)}}" >{{$course->course_name}}</a></li>
+                                                    @endforeach
                                                 </ul>
                                             </div>
                                             <div class="col-lg-2 col-md-6">
                                                 <ul class="list-style-none">
                                                     <li><h6>Top rated</h6></li>
-                                                    <li><a href="../demo-business/index.html" target="_blank">sample top rated</a></li>
+                                                    @foreach($courses->random(5) as $course)
+                                                        <li><a href="{{route('course.show', $course->id)}}" >{{$course->course_name}}</a></li>
+                                                    @endforeach
                                                 </ul>
                                             </div>
                                             <div class="col-lg-2 col-md-6">
                                                 <ul class="list-style-none">
                                                     <li><h6>Recent Additions</h6></li>
-                                                    <li><a href="../demo-business/index.html" target="_blank">sample recent</a></li>
+                                                    @foreach($courses->random(5) as $course)
+                                                        <li><a href="{{route('course.show', $course->id)}}" >{{$course->course_name}}</a></li>
+                                                    @endforeach
                                                 </ul>
                                             </div>
                                         </div>
@@ -118,7 +133,22 @@
                                 </li>
                                 @if (Route::has('login'))
                                     @auth
-                                        <li class="nav-item float-right"><a class="nav-link" href="{{route('home')}}"><i class="fa fa-comments"></i>Home</a></li>
+                                        <li class="nav-item float-right"><a class="nav-link" href="{{route('home')}}"><i class="fa fa-comments"></i>Home</a></li><li class="nav-item mt-4 float-right">
+                                            <a class="btn btn-rounded btn-dark" href="#"><i class="fa fa-user"></i>{{auth()->user()->name}}</a></li>
+                                        <li class="nav-item float-right">
+                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                                   onclick="event.preventDefault();
+                                                         document.getElementById('logout-form').submit();">
+                                                    {{ __('Sign Out') }}
+                                                </a>
+
+                                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                    @csrf
+                                                </form>
+                                            </div>
+                                        </li>
+
                                     @else
                                         <li class="nav-item pull-right"><a class="nav-link" href="{{route('login')}}">Login</a></li>
                                         <li class="nav-item mt-4 pull-right">
@@ -157,7 +187,7 @@
             <!-- ============================================================== -->
             <!-- Back to top -->
             <!-- ============================================================== -->
-            <a class="bt-top btn btn-circle btn-lg btn-success" href="index.html#top"><i class="ti-arrow-up"></i></a>
+            <a class="bt-top btn btn-circle btn-lg btn-success" href="#top"><i class="ti-arrow-up"></i></a>
         </div>
             <!-- ============================================================== -->
             <!-- End Page wrapper  -->
@@ -169,47 +199,27 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-3 col-md-6 m-b-30">
-                            <h5 class="m-b-20">Address</h5>
-                            <p>71 Amsteroum Avenue Cronish Night, NY 35098</p>
+                            <h5 class="m-b-20">Contacts</h5>
+                            <p>Akedu </p>
                         </div>
-                        <div class="col-lg-3 col-md-6 m-b-30">
-                            <h5 class="m-b-20">Phone</h5>
-                            <p>Reception : +205 123 4567
-                                <br/>Office : +207 235 7890</p>
-                        </div>
-                        <div class="col-lg-3 col-md-6 m-b-30">
-                            <h5 class="m-b-20">Email</h5>
-                            <p>Office : <a href="index.html#" class="link">info@wrappixel.com</a>
-                                <br/>Site : <a href="index.html#" class="link">wrapkit@wrappixel.com</a></p>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <h5 class="m-b-20">Social</h5>
-                            <div class="round-social light">
-                                <a href="index.html#" class="link"><i class="fa fa-facebook"></i></a>
-                                <a href="index.html#" class="link"><i class="fa fa-twitter"></i></a>
-                                <a href="index.html#" class="link"><i class="fa fa-google-plus"></i></a>
-                                <a href="index.html#" class="link"><i class="fa fa-youtube-play"></i></a>
-                                <a href="index.html#" class="link"><i class="fa fa-instagram"></i></a>
-                            </div>
-                        </div>
+
                     </div>
                     <div class="f4-bottom-bar">
                         <div class="row">
                             <div class="col-md-12">
                                 <nav class="navbar navbar-expand-lg h1-nav p-l-0 p-r-0">
-                                    <a class="navbar-brand" href="index.html#"><img src="{{asset('images/footer-logo.png')}}" alt="wrapkit" width="50" /></a>
+                                    <a class="navbar-brand" href="{{route('home')}}">
+                                        <img src="" alt="" width="50" />
+                                    </a>
                                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#header1" aria-expanded="false" aria-label="Toggle navigation">
                                         <span class="ti-menu"></span>
                                     </button>
                                     <div class="collapse navbar-collapse" id="header1">
-                                        <span class="hidden-lg-down">All Rights Reserved by WrapPixel.</span>
+                                        <span class="hidden-lg-down">Akedu Student Connect.</span>
                                         <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-                                            <li class="nav-item active"><a class="nav-link" href="index.html#">Home</a></li>
-                                            <li class="nav-item"><a class="nav-link" href="index.html#">Products</a></li>
-                                            <li class="nav-item"><a class="nav-link" href="index.html#">Features</a></li>
-                                            <li class="nav-item"><a class="nav-link" href="index.html#">About Us</a></li>
-                                            <li class="nav-item"><a class="nav-link" href="index.html#">Pricing</a></li>
-                                            <li class="nav-item"><a class="nav-link" href="index.html#">Contact</a></li>
+                                            <li class="nav-item active"><a class="nav-link" href="{{route('home')}}">Colleges</a></li>
+                                            <li class="nav-item"><a class="nav-link" href="#">Courses</a></li>
+                                            <li class="nav-item"><a class="nav-link" href="#">College Facilities</a></li>
                                         </ul>
                                     </div>
                                 </nav>

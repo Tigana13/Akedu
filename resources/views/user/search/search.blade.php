@@ -60,7 +60,7 @@
                     @foreach ($colleges as $college)
                         <div class="col-md-4">
                             <div class="card">
-                                <a href="{{$college->images->random()->image}}" class="img-ho" title="{{$college->college_name}}"><img class="card-img-top" src="{{$college->images->random()->image}}" alt="{{$college->images->random()->image}}" /></a>
+                                <a href="{{route('college.show', $college->id)}}" class="img-ho" title="{{$college->college_name}}"><img class="card-img-top" src="{{$college->images->random()->image}}" alt="{{$college->images->random()->image}}" /></a>
                                 <div class="">
                                     <h5 class="title">{{$college->college_name}}</h5>
                                 </div>

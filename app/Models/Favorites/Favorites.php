@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Favorites extends Model
 {
-    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -16,7 +15,7 @@ class Favorites extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'favoritable_id', 'favoritable_type'
+        'user_id', 'favorite_description',
     ];
 
     /**
@@ -45,6 +44,7 @@ class Favorites extends Model
     // Each favorite belongs to a user
     public function user()
     {
-        return $this->belongsTo(User::class, 'id');
+        return $this->morphedByMany(User::class, 'favoritable');
     }
+
 }

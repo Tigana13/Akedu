@@ -8,6 +8,8 @@ use App\Models\Facility\Facility;
 use App\Models\Image\Image;
 use App\Models\Intakes\Intakes;
 use App\Models\Locations\Locations;
+use App\Models\Threads\Threads;
+use App\Models\Topics\Topics;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Scout\Searchable;
@@ -59,6 +61,22 @@ class College extends Authenticatable
     public function images()
     {
         return $this->morphToMany(Image::class, 'imageable');
+    }
+
+    public function bannerimages()
+    {
+        return $this->hasMany(Image::class, 'college_id');
+    }
+
+
+    public function topics()
+    {
+        return $this->morphMany(Topics::class, 'topicable');
+    }
+
+    public function threads()
+    {
+        return $this->morphMany(Threads::class, 'threadable');
     }
 
 }

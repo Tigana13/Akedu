@@ -24,8 +24,4 @@ class CollegeProfile extends Model
         return $array;
     }
 
-    public function bannerimages()
-    {
-        return $this->hasMany(Image::class, 'college_id');
-    }
 }

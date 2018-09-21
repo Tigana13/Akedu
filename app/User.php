@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Favorites\Favoritable;
 use App\Models\Favorites\Favorites;
 use App\Models\User\UserProfile;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -10,7 +11,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends \TCG\Voyager\Models\User
 {
-    use Notifiable, SoftDeletes;
+    use Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -52,7 +53,7 @@ class User extends \TCG\Voyager\Models\User
     // Each user may several favorite records
     public function favorites()
     {
-        return $this->morphToMany(Favorites::class, 'favoritable');
+        return $this->hasMany(Favoritable::class, 'user_id');
     }
 
 }

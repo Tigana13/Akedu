@@ -33,7 +33,9 @@ class CollegeController extends Controller
 
     public function show($id)
     {
-        $college = College::with('courses', 'facilities', 'intakes', 'images', 'locations.country', 'profile','profile.bannerimages')->findOrFail($id);
+
+        $college = College::with('courses', 'facilities', 'intakes', 'images', 'locations.country', 'profile','bannerimages')->findOrFail($id);
+
 
         return view('college.profile.college_profile', compact('college'));
     }

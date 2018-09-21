@@ -3,8 +3,11 @@
 namespace App\Models\Course;
 
 use App\Models\College\College;
+use App\Models\Comments\Comments;
 use App\Models\Course\Profile\CourseProfile;
 use App\Models\Intakes\Intakes;
+use App\Models\Threads\Threads;
+use App\Models\Topics\Topics;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Scout\Searchable;
@@ -43,7 +46,22 @@ class Course extends Model
      */
     public function colleges()
     {
-        return $this->morphedByMany(College::class, 'courseable');
+        return $this->morphedByMany(College::class, 'courseables');
+    }
+
+    public function topics()
+    {
+        return $this->morphMany(Topics::class, 'topicable');
+    }
+
+    public function threads()
+    {
+        return $this->morphMany(Threads::class, 'threadable');
+    }
+
+    public function comments()
+    {
+        return $this->morphMany(Comments::class, 'commentable');
     }
 
 }

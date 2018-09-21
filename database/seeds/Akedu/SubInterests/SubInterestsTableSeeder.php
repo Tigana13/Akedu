@@ -10,7 +10,7 @@ class SubInterestsTableSeeder extends Seeder
     public function __construct()
     {
         $this->faker = Faker\Factory::create();
-        $this->interests = \App\Models\Intakes\Intakes::all();
+        $this->interests = \App\Models\Interests\Interests::all();
     }
     /**
      * Run the database seeds.
@@ -27,6 +27,8 @@ class SubInterestsTableSeeder extends Seeder
                 'sub_interest' => $this->faker->name,
                 'sub_interest_icon' => $this->faker->imageUrl(200,200)
             ]);
+
+            $x++;
         }
     }
 }

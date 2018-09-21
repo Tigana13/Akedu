@@ -58,7 +58,14 @@ class UsersSeeder extends Seeder
         //Create user Favorites
         $i = 0;
         while ($i < 7){
-            \App\Models\Favorites\Favorites::create([
+            $favorite = \App\Models\Favorites\Favorites::create([
+                'favorite_type' => (mt_rand(0,1)) ? $this->college_favoritable_type : $this->course_favoritable_type,
+                'favorite_id' => $this->faker->numberBetween(1,28),
+                'description' => $this->faker->paragraph,
+            ]);
+
+            \App\Models\Favorites\Favoritable::create([
+                'favorites_id' => $favorite->id,
                 'user_id' => $user->id,
                 'favoritable_id' => $this->faker->numberBetween(1,28),
                 'favoritable_type' => (mt_rand(0,1)) ? $this->college_favoritable_type : $this->course_favoritable_type

@@ -17,10 +17,8 @@ class InterestsTableSeeder extends Seeder
      */
     public function run()
     {
-        $x = 0;
-
-        while ($x  < 20){
-            $interest = \App\Models\Interests\Interests::create([
+        for($x=0; $x<20; $x++){
+            \App\Models\Interests\Interests::create([
                 'interest_name' => $this->faker->name,
                 'interest_icon' => $this->faker->imageUrl(200,200)
             ]);

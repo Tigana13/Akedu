@@ -34,7 +34,6 @@ class Image extends Model
     }
 
     // Relationship
-    //Get all the models for the profile image
     public function imageable()
     {
         return $this->morphTo();
