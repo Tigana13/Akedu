@@ -5,9 +5,11 @@ use Illuminate\Database\Seeder;
 class InterestsTableSeeder extends Seeder
 {
     protected $faker;
+    protected $users;
 
     public function __construct()
     {
+        $this->users = \App\User::all();
         $this->faker = Faker\Factory::create();
     }
     /**
@@ -19,6 +21,7 @@ class InterestsTableSeeder extends Seeder
     {
         for($x=0; $x<20; $x++){
             \App\Models\Interests\Interests::create([
+                'user_id' => $this->users->random()->id,
                 'interest_name' => $this->faker->name,
                 'interest_icon' => $this->faker->imageUrl(200,200)
             ]);

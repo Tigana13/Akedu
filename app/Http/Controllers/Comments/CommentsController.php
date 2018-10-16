@@ -9,6 +9,13 @@ use App\Http\Controllers\Controller;
 class CommentsController extends Controller
 {
 
+    /**
+     * Add a comment to the DB
+     *
+     * @param Request $request
+     * @param $comment_id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function addCommentComment(Request $request, $comment_id)
     {
         $comment = Comments::findOrFail($comment_id);

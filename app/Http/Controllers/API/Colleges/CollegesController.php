@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\Validator;
 
 class CollegesController extends Controller
 {
+    public function __construct()
+    {
+//        $this->middleware();
+    }
     /**
      * Display a listing of the resource.
      *

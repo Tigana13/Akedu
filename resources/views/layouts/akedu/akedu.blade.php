@@ -72,24 +72,31 @@ $courses = \App\Models\Course\Course::all();
                                             <div class="col-lg-2 col-md-6">
                                                 <ul class="list-style-none">
                                                     <li><h6>Featured</h6></li>
-                                                    @foreach($colleges->random(5) as $college)
-                                                        <li><a href="{{route('college.show', $college->id)}}" >{{$college->college_name}}</a></li>
-                                                    @endforeach
+                                                   @if($colleges->isNotEmpty())
+                                                        @foreach($colleges->random(5) as $college)
+                                                            <li><a href="{{route('college.show', $college->id)}}" >{{$college->college_name}}</a></li>
+                                                        @endforeach
+                                                   @endif
                                                 </ul>
                                             </div>
                                             <div class="col-lg-2 col-md-6">
                                                 <ul class="list-style-none">
                                                     <li><h6>Top rated</h6></li>
-                                                    @foreach($colleges->random(5) as $college)
-                                                        <li><a href="{{route('college.show', $college->id)}}" >{{$college->college_name}}</a></li>
-                                                    @endforeach                                                </ul>
+                                                    @if($colleges->isNotEmpty())
+                                                        @foreach($colleges->random(5) as $college)
+                                                            <li><a href="{{route('college.show', $college->id)}}" >{{$college->college_name}}</a></li>
+                                                        @endforeach
+                                                    @endif
+                                                </ul>
                                             </div>
                                             <div class="col-lg-2 col-md-6">
                                                 <ul class="list-style-none">
                                                     <li><h6>Recent Additions</h6></li>
-                                                    @foreach($colleges->random(5) as $college)
-                                                        <li><a href="{{route('college.show', $college->id)}}" >{{$college->college_name}}</a></li>
-                                                    @endforeach                                                </ul>
+                                                    @if($colleges->isNotEmpty())
+                                                        @foreach($colleges->random(5) as $college)
+                                                            <li><a href="{{route('college.show', $college->id)}}" >{{$college->college_name}}</a></li>
+                                                        @endforeach
+                                                    @endif                                                </ul>
                                             </div>
                                         </div>
                                     </div>
@@ -107,25 +114,31 @@ $courses = \App\Models\Course\Course::all();
                                             <div class="col-lg-2 col-md-6">
                                                 <ul class="list-style-none">
                                                     <li><h6>Featured</h6></li>
-                                                    @foreach($courses->random(5) as $course)
-                                                        <li><a href="{{route('course.show', $course->id)}}" >{{$course->course_name}}</a></li>
-                                                    @endforeach
+                                                    @if($courses->isNotEmpty())
+                                                        @foreach($courses->random(5) as $course)
+                                                            <li><a href="{{route('course.show', $course->id)}}" >{{$course->course_name}}</a></li>
+                                                        @endforeach
+                                                    @endif
                                                 </ul>
                                             </div>
                                             <div class="col-lg-2 col-md-6">
                                                 <ul class="list-style-none">
                                                     <li><h6>Top rated</h6></li>
-                                                    @foreach($courses->random(5) as $course)
-                                                        <li><a href="{{route('course.show', $course->id)}}" >{{$course->course_name}}</a></li>
-                                                    @endforeach
+                                                    @if($courses->isNotEmpty())
+                                                        @foreach($courses->random(5) as $course)
+                                                            <li><a href="{{route('course.show', $course->id)}}" >{{$course->course_name}}</a></li>
+                                                        @endforeach
+                                                    @endif
                                                 </ul>
                                             </div>
                                             <div class="col-lg-2 col-md-6">
                                                 <ul class="list-style-none">
                                                     <li><h6>Recent Additions</h6></li>
-                                                    @foreach($courses->random(5) as $course)
-                                                        <li><a href="{{route('course.show', $course->id)}}" >{{$course->course_name}}</a></li>
-                                                    @endforeach
+                                                    @if($courses->isNotEmpty())
+                                                        @foreach($courses->random(5) as $course)
+                                                            <li><a href="{{route('course.show', $course->id)}}" >{{$course->course_name}}</a></li>
+                                                        @endforeach
+                                                    @endif
                                                 </ul>
                                             </div>
                                         </div>
@@ -133,8 +146,10 @@ $courses = \App\Models\Course\Course::all();
                                 </li>
                                 @if (Route::has('login'))
                                     @auth
-                                        <li class="nav-item float-right"><a class="nav-link" href="{{route('home')}}"><i class="fa fa-comments"></i>Home</a></li><li class="nav-item mt-4 float-right">
-                                            <a class="btn btn-rounded btn-dark" href="#"><i class="fa fa-user"></i>{{auth()->user()->name}}</a></li>
+                                        <li class="nav-item float-right"><a class="nav-link" href="{{route('home')}}"><i class="fa fa-comments"></i>Home</a></li>
+                                        <li class="nav-item mt-4 float-right">
+                                            <a class="btn btn-rounded btn-dark" href="{{route('user.profile')}}"><i class="fa fa-user"></i>{{auth()->user()->name}}</a>
+                                        </li>
                                         <li class="nav-item float-right">
                                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                                 <a class="dropdown-item" href="{{ route('logout') }}"
@@ -156,6 +171,7 @@ $courses = \App\Models\Course\Course::all();
                                         </li>
                                     @endauth
                                 @endif
+
                             </ul>
 
                         </div>

@@ -19,6 +19,7 @@ class AdminsTableSeeder extends Seeder
      */
     public function run()
     {
+
         \App\Models\Admin\Admin::create([
             'name'  => 'Tigana Ochieng',
             'email' => 'tiganaoch@gmail.com',

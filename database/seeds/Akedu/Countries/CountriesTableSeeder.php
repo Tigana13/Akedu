@@ -262,7 +262,6 @@ class CountriesTableSeeder extends Seeder
             array('countryName' => 'Venezuela','country_code' => 'VE','dialCode' => '58','region_code' => 'sa','continent' => 'South America')
         );
 
-
         foreach ($countries as $country) {
             \App\Models\Countries\Countries::create([
                 'country_name' => $country['countryName'],

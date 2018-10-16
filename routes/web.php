@@ -19,6 +19,8 @@ Route::group(['prefix' => 'admin'], function () {
 Auth::routes();
 
 Route::get('/', 'College\CollegeController@index')->name('home');
+Route::get('/user/profile', 'User\UserController@profile')->name('user.profile');
+Route::post('/user/profile/update', 'User\UserController@updateBio')->name('user.bio.update');
 
 Route::get('/colleges', 'College\CollegeController@index')->name('colleges');
 Route::get('/colleges/{id}', 'College\CollegeController@show')->name('college.show');
@@ -37,3 +39,4 @@ Route::post('/courses/thread/search', 'Courses\CoursesController@searchThreads')
 
 Route::post('/comments/comment/{comment_id}', 'Comments\CommentsController@addCommentComment')->name('comment.comment');
 
+Route::view('/{path?}', 'app');
