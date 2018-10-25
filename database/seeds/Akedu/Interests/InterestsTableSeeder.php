@@ -21,7 +21,7 @@ class InterestsTableSeeder extends Seeder
     {
         for($x=0; $x<20; $x++){
             \App\Models\Interests\Interests::create([
-                'user_id' => $this->users->random()->id,
+                'user_id' => ($this->users->isNotEmpty()) ? $this->users->random()->id: 1,
                 'interest_name' => $this->faker->name,
                 'interest_icon' => $this->faker->imageUrl(200,200)
             ]);
