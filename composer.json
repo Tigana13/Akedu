@@ -12,14 +12,15 @@
         "algolia/algoliasearch-client-php": "^1.27",
         "doctrine/dbal": "^2.7",
         "fideloper/proxy": "^4.0",
+        "fzaninotto/faker": "^1.4",
         "laravel/framework": "5.7.*",
         "laravel/homestead": "^7.18",
         "laravel/passport": "^7.0",
         "laravel/scout": "^5.0",
         "laravel/tinker": "^1.0",
+        "php-ai/php-ml": "^0.6.2",
         "symfony/process": "^4.1",
-        "tcg/voyager": "^1.1",
-        "fzaninotto/faker": "^1.4"
+        "tcg/voyager": "^1.1"
     },
     "require-dev": {
         "filp/whoops": "^2.0",

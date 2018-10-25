@@ -3,6 +3,7 @@
 namespace App\Models\College;
 
 use App\Models\College\Profile\CollegeProfile;
+use App\Models\Comments\Comments;
 use App\Models\Course\Course;
 use App\Models\Facility\Facility;
 use App\Models\Image\Image;
@@ -10,6 +11,7 @@ use App\Models\Intakes\Intakes;
 use App\Models\Locations\Locations;
 use App\Models\Threads\Threads;
 use App\Models\Topics\Topics;
+use App\Models\Views\Views;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Scout\Searchable;
@@ -77,6 +79,16 @@ class College extends Authenticatable
     public function threads()
     {
         return $this->morphMany(Threads::class, 'threadable');
+    }
+
+    public function views()
+    {
+        return $this->morphMany(Views::class, 'viewable');
+    }
+
+    public function comments()
+    {
+        return $this->morphMany(Comments::class, 'commentable');
     }
 
 }

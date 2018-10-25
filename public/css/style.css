@@ -2700,7 +2700,7 @@ common-innerpage-banner
 .with-noborder .media {
   border: 0px;
   padding: 0px;
-  margin: 50px 0; }
+}
 
 .owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span {
   background: #1dc8cd; }
@@ -2880,3 +2880,5 @@ File: scss
     padding-right: 20px; }
   .dropdown-submenu > .dropdown-menu.show {
     display: block; } }
+
+

@@ -20,7 +20,6 @@ class UsersSeeder extends Seeder
         $this->college_favoritable_type = \App\Models\College\College::class;
         $this->course_favoritable_type = \App\Models\Course\Course::class;
 
-        \App\User::truncate();
     }
     /**
      * Run the database seeds.

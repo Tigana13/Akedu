@@ -19,12 +19,15 @@ class InterestsTableSeeder extends Seeder
      */
     public function run()
     {
-        for($x=0; $x<20; $x++){
+        $interests = collect(['Arts','Design & Performance', 'Business', 'Communications & Media Education', 'Entrepreneurship',' Health & Wellness Public', 'Social & Human Services',
+            'Science', 'Technology','Engineering & Mathematics', 'Sustainability', 'Environmental & Natural Resources']);
+
+        $interests->map(function ($interest, $key){
             \App\Models\Interests\Interests::create([
-                'user_id' => $this->users->random()->id,
-                'interest_name' => $this->faker->name,
+                'user_id' => ($this->users->isNotEmpty()) ? $this->users->random()->id : 1,
+                'interest_name' => $interest,
                 'interest_icon' => $this->faker->imageUrl(200,200)
             ]);
-        }
+        });
     }
 }

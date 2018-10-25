@@ -1,10 +1,10 @@
-a<?php
+<?php
 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateIntakesTable extends Migration
+class CreateViewsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class CreateIntakesTable extends Migration
      */
     public function up()
     {
-        Schema::create('intakes', function (Blueprint $table) {
+        Schema::create('views', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('college_id');
-            $table->string('intake_alias')->nullable();
-            $table->text('intake_description')->nullable();
-            $table->string('intake_start');
-            $table->string('intake_finish');
+            $table->unsignedInteger('user_id');
+            $table->string('view_medium')->nullable();
+            $table->morphs('viewable');
             $table->timestamps();
         });
     }
@@ -31,6 +29,6 @@ class CreateIntakesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('intakes');
+        Schema::dropIfExists('views');
     }
 }
