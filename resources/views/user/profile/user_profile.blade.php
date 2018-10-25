@@ -65,7 +65,7 @@
                     <div class="form-group row">
                         <label for="bio-phone" class="col-2 col-form-label">Phone Number</label>
                         <div class="col-10">
-                            <input class="form-control" value="{{auth()->user()->profile->phone_number}}" name="phone_number" type="number" placeholder="+254..." id="bio-phone">
+                            <input class="form-control" value="{{(auth()->user()->profile != null) ? auth()->user()->profile->phone_number : ''}}" name="phone_number" type="number" placeholder="+254..." id="bio-phone">
                             @if ($errors->has('phone_number'))
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $errors->first('phone_number') }}</strong>
@@ -77,10 +77,12 @@
                         <label for="bio-dob" class="col-2 col-form-label">
                             Date of Birth
                             <br>
-                            <span class="label label-success">{{date('d-M-Y', strtotime(auth()->user()->profile->dob))}}</span>
+                            @if(auth()->user()->profile != null)
+                                <span class="label label-success">{{date('d-M-Y', strtotime(auth()->user()->profile->dob))}}</span>
+                            @endif
                         </label>
                         <div class="col-10">
-                            <input class="form-control" value="{{date('d-M-Y', strtotime(auth()->user()->profile->dob))}}" placeholder="{{auth()->user()->profile->dob}}" name="dob" type="date" id="bio-dob">
+                            <input class="form-control" value="" placeholder="" name="dob" type="date" id="bio-dob">
                             @if ($errors->has('dob'))
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $errors->first('dob') }}</strong>
@@ -91,7 +93,7 @@
                     <div class="form-group row">
                         <label for="bio-occupation" class="col-2 col-form-label">Occupation</label>
                         <div class="col-10">
-                            <input class="form-control" value="{{auth()->user()->profile->occupation}}" name="occupation" type="text" id="bio-occupation">
+                            <input class="form-control" value="{{ (auth()->user()->profile != null) ? auth()->user()->profile->occupation : ''}}" name="occupation" type="text" id="bio-occupation">
                             @if ($errors->has('occupation'))
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $errors->first('occupation') }}</strong>
@@ -103,7 +105,7 @@
                         <label for="bio-occupation" class="col-2 col-form-label">
                             Are you a student?
                             <br>
-                            @if(auth()->user()->profile->is_student)
+                            @if(auth()->user()->profile != null && auth()->user()->profile->is_student)
                                 <span class="label label-success">Active</span>
                             @endif
                         </label>
@@ -150,7 +152,7 @@
                 </div>
                 <!-- Row -->
                 <div class="row wrap-feature-24">
-                    @forelse($interests as $interest)
+                    @forelse(auth()->user()->interests as $interest)
                         <div class="col-lg-3 col-md-6">
                             <a href="#">
                                 <div class="card card-shadow">
@@ -165,8 +167,8 @@
                             <span class="label label-warning label-rounded">No interests selected</span>
                         </div>
                     @endforelse
-
-            </div>
+                        <a href="" class="btn btn-lg btn-success">Add Interests</a>
+                </div>
         </div>
 
     </div>

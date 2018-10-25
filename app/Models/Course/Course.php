@@ -64,4 +64,9 @@ class Course extends Model
         return $this->morphMany(Comments::class, 'commentable');
     }
 
+    public function views()
+    {
+        return $this->morphMany($this, 'viewable');
+    }
+
 }

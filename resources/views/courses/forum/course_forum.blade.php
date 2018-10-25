@@ -131,15 +131,11 @@
                                 <span class="d-flex mr-3" style="font-weight: bold; color: #0c5460">{{$comment->user->name}}</span>
                                 <div class="media-body">
                                     <p>{{$comment->body}}</p>
-                                    <br/>
-                                    <br/>
                                     @foreach ($comment->comments as $reply)
                                         <div class="media">
                                             <span class="d-flex mr-3" style="font-weight: bold; color: #0c5460">{{$comment->user->name}}</span>
                                             <div class="media-body">
                                                 <p>{{$reply->body}}</p>
-                                                <br/>
-                                                <br/>
                                                 <p style="color: orangered;">Replies <span class="badge badge-success">{{$reply->comments->count()}}</span> </p>
                                             </div>
                                         </div>
@@ -155,9 +151,7 @@
                                             </div>
                                         </form>
                                     @endauth
-                                    <br>
                                     <p style="color: orangered;">Replies <span class="badge badge-success">{{$comment->comments->count()}}</span> </p>
-
                                 </div>
                             </li>
                         @endforeach

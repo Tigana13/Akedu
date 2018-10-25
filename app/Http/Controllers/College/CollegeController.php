@@ -31,15 +31,24 @@ class CollegeController extends Controller
         return view('user.landing', compact('colleges'));
     }
 
+    /**
+     * Show the profile for a single college
+     *
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function show($id)
     {
-
         $college = College::with('courses', 'facilities', 'intakes', 'images', 'locations.country', 'profile','bannerimages')->findOrFail($id);
-
 
         return view('college.profile.college_profile', compact('college'));
     }
 
+    /**
+     * Search DB for college record according to request
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
     public function search(Request $request)
     {
         $validator = Validator::make($request->all(), [
