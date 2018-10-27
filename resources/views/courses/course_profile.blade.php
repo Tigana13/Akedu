@@ -116,7 +116,7 @@
                                         <form class="row comment-reply" action="{{route('comment.comment', $comment->id)}}" method="post">
                                             @csrf
                                             <div class="form-group col-md-12">
-                                                <input type="text" class="form-control text-input" name="comment_body" placeholder="Reply"/>
+                                                <input type="text" class="form-control text-input" name="comment_body" placeholder="Write a reply here ..."/>
                                             </div>
                                             <div class="form-group col-md-12 m-t-10">
                                                 <button type="submit" class="btn btn-secondary waves-effect waves-light m-r-10">Reply</button>

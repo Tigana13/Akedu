@@ -63,20 +63,17 @@
                                             <span class="d-flex mr-3" style="font-weight: bold; color: #0c5460">{{$comment->user->name}}</span>
                                             <div class="media-body">
                                                 <p>{{$reply->body}}</p>
-                                                <br/>
-                                                <br/>
-                                                <p style="color: orangered;">Replies <span class="badge badge-success">{{$reply->comments->count()}}</span> </p>
                                             </div>
                                         </div>
                                     @endforeach
                                     @auth
-                                        <form class="row" action="{{route('comment.comment', $comment->id)}}" method="post">
+                                        <form class="row comment-reply" action="{{route('comment.comment', $comment->id)}}" method="post">
                                             @csrf
                                             <div class="form-group col-md-12">
-                                                <input type="text" class="form-control" name="comment_body" placeholder="Comment"/>
+                                                <input type="text" class="form-control text-input" name="comment_body" placeholder="Write a reply here ..."/>
                                             </div>
                                             <div class="form-group col-md-12 m-t-10">
-                                                <button type="submit" class="btn btn-info waves-effect waves-light m-r-10">Submit</button>
+                                                <button type="submit" class="btn btn-secondary waves-effect waves-light m-r-10">Reply</button>
                                             </div>
                                         </form>
                                     @endauth
