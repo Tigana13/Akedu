@@ -17,8 +17,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/login', 'API\Auth\LoginController@login');
-Route::post('/logout', 'API\Auth\LoginController@logout');
+Route::prefix('users')->group(function () {
+    //Parameters: Register: name, password, password_confirmation,
+    Route::post('/register', 'API\Auth\User\RegisterController@register');
+    Route::post('/login', 'API\Auth\User\LoginController@login');
+    Route::post('/logout', 'API\Auth\User\LoginController@logout');
+});
 
 Route::get('/colleges', 'API\Colleges\CollegesController@index');
 Route::get('/colleges/{id}', 'API\Colleges\CollegesController@show');
