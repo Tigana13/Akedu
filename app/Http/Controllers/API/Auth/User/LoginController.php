@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API\Auth;
+namespace App\Http\Controllers\API\Auth\User;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -29,7 +29,7 @@ class LoginController extends Controller
 
         if(!Auth::attempt($credentials))
             return response()->json([
-                'message' => 'Unauthorized'
+                'message' => 'Login Failed'
             ], 401);
 
         $user = $request->user();
