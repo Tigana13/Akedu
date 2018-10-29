@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API\Auth\User;
 
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -22,8 +23,8 @@ class RegisterController extends Controller
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
+            'name' => 'required|string|max:255',
             'password' => 'required|string|min:6|confirmed',
         ]);
 
@@ -36,37 +37,22 @@ class RegisterController extends Controller
         $new_user->name = $request->name;
         $new_user->email = $request->email;
         $new_user->password = Hash::make($request->password);
-//        $new_user->save();
+        $new_user->save();
 
-//        $params = [
-//            'grant_type' => 'password',
-//            'client_id' => $this->client->id,
-//            'client_secret' => $this->client->secret,
-//            'username' => $new_user->name,
-//            'password' => $request->password,
-//            'scope' => '*',
-//        ];
 
         $tokenResult = $new_user->createToken('Personal Access Token');
         $token = $tokenResult->token;
 
         $token->save();
 
-        dd($token);
-
         return response()->json([
+            'user' => $new_user,
             'access_token' => $tokenResult->accessToken,
             'token_type' => 'Bearer',
             'expires_at' => Carbon::parse(
                 $tokenResult->token->expires_at
             )->toDateTimeString()
         ]);
-
-        $request->request->add($params);
-//        dd($this->client);
-        $proxy = Request::create('oauth/token', 'POST');
-
-        return Route::dispatch($proxy);
 
     }
 }

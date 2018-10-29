@@ -15,6 +15,8 @@ class User extends \TCG\Voyager\Models\User
 {
     use Notifiable, HasApiTokens;
 
+    protected $guarded = ['password', 'id'];
+
     /**
      * The attributes that are mass assignable.
      *
