@@ -20,7 +20,7 @@ class CoursesResource extends JsonResource
             'id' => $this->id,
             'course_name' => $this->course_name,
             'certified' => $this->certified,
-            'college' => CollegesResource::collection($this->whenLoaded('college')),
+            'colleges' => CollegesResource::collection($this->whenLoaded('colleges')),
             'intakes' => IntakesResource::collection($this->whenLoaded('intakes')),
         ];
     }
