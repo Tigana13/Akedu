@@ -22,7 +22,7 @@ class LoginController extends Controller
         $request->validate([
             'email' => 'required|string|email',
             'password' => 'required|string',
-            'remember_me' => 'boolean'
+            'remember_me' => 'nullable|boolean'
         ]);
 
         $credentials = request(['email', 'password']);
