@@ -48,8 +48,8 @@ Route::get('/courses/forum/{id}', 'API\Courses\CoursesController@showForum')->na
 Route::post('/courses/comment/{course_id}', 'API\Courses\CoursesController@addCourseComment')->name('api.course.comment');
 //show a course thread
 Route::get('/courses/thread/{course_id}/{thread_id}', 'API\Courses\CoursesController@showCourseThread')->name('api.course.thread.show');
-//Create a thread for the course: thread
-Route::post('/courses/thread/create', 'API\Courses\CoursesControllerThread@createCourseThread')->name('api.thread.store');
+//Create a thread for the course: thread: thread_subject, thread_title, course_id
+Route::post('/courses/thread/create', 'API\Courses\CoursesController@createCourseThread')->name('api.thread.store');
 //Comment on a course thread: comment
 Route::post('/courses/thread/comment/{thread_id}', 'API\Courses\CoursesController@addThreadComment')->name('api.course.thread.comment');
 //Search for a course thread: Collection(_threads_), course, search_hits
