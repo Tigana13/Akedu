@@ -23,7 +23,7 @@ class CoursesController extends Controller
      */
     public function index()
     {
-        $courses = Course::with(['college','intakes','facilities'])->paginate(10);  
+        $courses = Course::with(['colleges','intakes','facilities'])->paginate(10);
         return CoursesResource::collection($courses);
     }
 
