@@ -121,7 +121,7 @@ class CoursesController extends Controller
         ]);
 
         if ($validator->fails()){
-            return response('Validation failed', 417)->json(['error' => $validator->errors()]);
+            return response()->json(['message' => 'Validation failed','error' => $validator->errors()], 417);
         }
 
         $course = Course::findOrFail($course_id);
@@ -132,7 +132,7 @@ class CoursesController extends Controller
 
         $course->comments()->save($comment);
 
-        return response('success', 201)->json(['comment' => $comment]);
+        return response()->json(['message' => 'Comment added successfully', 'comment' => $comment], 200);
 
     }
 
@@ -151,7 +151,7 @@ class CoursesController extends Controller
         ]);
 
         if ($validator->fails()){
-            return response('Validation failed', 417)->json(['error' => $validator->errors()]);
+            return response()->json(['message' => 'Validation failed', 'error' => $validator->errors()], 417);
         }
 
         $course = Course::findOrFail($request->course_id);
@@ -164,7 +164,7 @@ class CoursesController extends Controller
 
         $course->threads()->save($thread);
 
-        return response('success', 201)->json(['thread' => $thread]);
+        return response()->json(['message' => 'Thread created successfully','thread' => $thread], 200);
 
     }
 
@@ -198,7 +198,7 @@ class CoursesController extends Controller
         ]);
 
         if ($validator->fails()){
-            return response('Validation failed', 417)->json(['error' => $validator->errors()]);
+            return response()->json(['message' => 'Validation failed','error' => $validator->errors()], 417);
         }
 
         $thread = Threads::findOrFail($thread_id);
@@ -209,7 +209,7 @@ class CoursesController extends Controller
 
         $thread->comments()->save($comment);
 
-        return response('success', 201)->json(['comment' => $comment]);
+        return response()->json(['message' => 'Comment created successfully', 'comment' => $comment], 200);
 
     }
 
@@ -227,7 +227,7 @@ class CoursesController extends Controller
         ]);
 
         if ($validator->fails()){
-            return response('Validation failed', 417)->json(['error' => $validator->errors()]);
+            return response()->json(['message' => 'Validation failed', 'error' => $validator->errors()], 417);
         }
 
         $course = Course::findOrFail($request->course_id);
@@ -236,6 +236,6 @@ class CoursesController extends Controller
         $hits = $threads->count();
         $threads = $threads->get();
 
-        return response()->json(['course' => $course, 'threads' => $threads, 'hits' => $hits ]);
+        return response()->json(['course' => $course, 'threads' => $threads, 'hits' => $hits], 200);
     }
 }

@@ -44,7 +44,7 @@ Route::delete('/courses/{id}', 'API\Courses\CoursesController@destroy');
 //
 //Give info about a course forum :  'course,'threads ,'topics'
 Route::get('/courses/forum/{id}', 'API\Courses\CoursesController@showForum')->name('api.course.forum.show');
-//Comment on a course: comment
+//Comment on a course: comment: comment_body
 Route::post('/courses/comment/{course_id}', 'API\Courses\CoursesController@addCourseComment')->name('api.course.comment');
 //show a course thread
 Route::get('/courses/thread/{course_id}/{thread_id}', 'API\Courses\CoursesController@showCourseThread')->name('api.course.thread.show');
