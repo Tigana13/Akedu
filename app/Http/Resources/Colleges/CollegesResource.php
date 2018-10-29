@@ -20,7 +20,7 @@ class CollegesResource extends JsonResource
      */
     public function toArray($request)
     {
-        $college = CollegeProfile::where('college_id', id)->first();
+        $college = CollegeProfile::where('college_id', $this->id)->first();
         return [
             'id' => $this->id,
             'college_name' => $this->college_name,
