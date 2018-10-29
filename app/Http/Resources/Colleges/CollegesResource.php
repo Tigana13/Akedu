@@ -7,6 +7,7 @@ use App\Http\Resources\Facilities\FacilitiesResource;
 use App\Http\Resources\Images\ImagesResource;
 use App\Http\Resources\Intakes\IntakesResource;
 use App\Http\Resources\Locations\LocationsResource;
+use App\Models\College\Profile\CollegeProfile;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class CollegesResource extends JsonResource
@@ -19,10 +20,12 @@ class CollegesResource extends JsonResource
      */
     public function toArray($request)
     {
+        $college = CollegeProfile::where('college_id', id)->first();
         return [
             'id' => $this->id,
             'college_name' => $this->college_name,
             'college_email' => $this->college_email,
+            'college_description' => $college->college_description,
             'active' => $this->active,
             'certified' => $this->certified,
             'branches' => LocationsResource::collection($this->whenLoaded('locations')),

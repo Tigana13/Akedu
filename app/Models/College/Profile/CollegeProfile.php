@@ -9,6 +9,7 @@ use Laravel\Scout\Searchable;
 
 class CollegeProfile extends Model
 {
+
     use Searchable, SoftDeletes;
 
     public function searchableAs()
