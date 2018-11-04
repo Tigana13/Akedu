@@ -13,6 +13,8 @@
         "doctrine/dbal": "^2.7",
         "fideloper/proxy": "^4.0",
         "fzaninotto/faker": "^1.4",
+        "google/apiclient": "^2.2",
+        "google/cloud-language": "^0.16.1",
         "laravel/framework": "5.7.*",
         "laravel/homestead": "^7.18",
         "laravel/passport": "^7.0",

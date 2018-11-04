@@ -2,6 +2,10 @@
 
 namespace App\Console;
 
+use App\Console\Commands\CalibrateCoursesApproval;
+use App\Console\Commands\Course\RecalibrateSentimentRatings;
+use App\Console\Commands\RecommendCourse;
+use App\Console\Commands\Recommender\Vectorize;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -13,7 +17,9 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        CalibrateCoursesApproval::class,
+        Vectorize::class,
+        RecalibrateSentimentRatings::class
     ];
 
     /**
