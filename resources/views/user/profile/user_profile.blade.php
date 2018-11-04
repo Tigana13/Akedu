@@ -28,7 +28,7 @@
         <!-- End Static Slider 10  -->
         <!-- ============================================================== -->
 
-        <div class="spacer feature24">
+        <div class="feature24">
             <div class="container">
                @include('partials.session_alerts')
                 <!-- Row -->
@@ -106,11 +106,13 @@
                             Are you a student?
                             <br>
                             @if(auth()->user()->profile != null && auth()->user()->profile->is_student)
-                                <span class="label label-success">Active</span>
+                                <span class="label label-success">Yes</span>
                             @endif
                         </label>
                         <div class="col-10">
-                            <input class="form-control" value="1"  name="is_student" type="checkbox" id="bio-occupation">
+                            @if(auth()->user()->profile != null && auth()->user()->profile->is_student != 1)
+                                <input class="form-control" value="1"  name="is_student" type="checkbox" id="bio-occupation">
+                            @endif
                             @if ($errors->has('is_student'))
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $errors->first('is_student') }}</strong>
@@ -119,30 +121,54 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="bio-college" class="col-2 col-form-label">College</label>
+                        <label for="bio-dob" class="col-2 col-form-label">
+                            Year of Admission
+                        </label>
                         <div class="col-10">
-                            <select class="custom-select col-12" id="bio-college" name="college">
-                                <option selected="">Choose...</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
-                            @if ($errors->has('college'))
+                            @if(auth()->user()->profile != null)
+                                @if(auth()->user()->profile->admission_year == null)
+                                <input class="form-control" value="" placeholder="" name="admission_year" type="date" id="bio-admission_year">
+                                @else
+                                    <span class="label label-warning">{{date('d-M-Y', strtotime(auth()->user()->profile->admission_year))}}</span>
+                                @endif
+                            @endif
+
+                            @if ($errors->has('admission_year'))
                                 <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('college') }}</strong>
+                                    <strong>{{$errors->first('admission_year')}}</strong>
                                 </span>
                             @endif
                         </div>
                     </div>
                     <div class="form-group row">
-                        <input value="Submit" class="btn btn-lg btn-success offset-md-10 float-right" type="submit">
+                        <label for="bio-college" class="col-2 col-form-label">College</label>
+                        <div class="col-10">
+                            @if(auth()->user()->profile != null && auth()->user()->profile->college_id != null)
+                                <span class="label label-lg label-inverse">
+                                    {{\App\Models\College\College::findOrFail(auth()->user()->profile->college_id)->college_name}}
+                                </span>
+                            @else
+                                <select class="custom-select col-12" id="bio-college" name="college">
+                                    @foreach(\App\Models\College\College::all() as $college)
+                                        <option value="{{$college->id}}">{{$college->college_name}}</option>
+                                    @endforeach
+                                </select>
+                                @if ($errors->has('college'))
+                                    <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('college') }}</strong>
+                                </span>
+                                @endif
+                            @endif
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <input value="Update profile" class="btn btn-success offset-md-10 float-right" type="submit">
                     </div>
                 </form>
             </div>
         </div>
 
-
-        <div class="spacer feature24">
+        <div class="feature24 mb-lg-5">
             <div class="container">
                 <div class="row">
                     <div class="col-md-7">
@@ -167,8 +193,71 @@
                             <span class="label label-warning label-rounded">No interests selected</span>
                         </div>
                     @endforelse
-                        <a href="" class="btn btn-lg btn-success">Add Interests</a>
                 </div>
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                    Add Interests
+                </button>
+            </div>
+        </div>
+
+        {{--@if(\Carbon\Carbon::today() > \Carbon\Carbon::parse(auth()->user()->profile->completion_year) || auth()->user()->profile->college->id == null)--}}
+            <div class="feature24 mb-lg-5">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-7">
+                            <h2 class="title">Looking to join college?</h2>
+                            <p>If you are looking to join college, we can offer suggestions on courses and colleges.</p>
+                        </div>
+                    </div>
+                    <a href="#" class="btn btn-success">Get recommendation</a>
+                </div>
+            </div>
+        {{--@endif--}}
+        <div class="feature24 mb-lg-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-7">
+                        <h2 class="title">Completed your studies?</h2>
+                        <p>Once you are done with your course, you can fill this survey to assist in guiding other students to the right courses.</p>
+                    </div>
+                </div>
+                @if(!\auth()->user()->exitSurvey)
+                    <a href="{{route('exit_survey.show')}}" class="btn btn-success">Complete exit survey</a>
+                @else
+                    <a href="#" class="btn btn-secondary disabled" disabled><span class="text-danger">Survey already completed!</span></a>
+                @endif
+            </div>
+        </div>
+
+
+        <!-- Modals -->
+        <!-- Add interests Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Add Interests</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{route('user.interests.add')}}" method="post" id="addInterestsForm">
+                            @csrf
+                            <select title="interest_select" name="interests[]" id="select_intestest" multiple>
+                                @foreach(App\Models\Interests\Interests::all() as $interest)
+                                    <option value="{{$interest->id}}">{{$interest->interest_name}}</option>
+                                @endforeach
+                            </select>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('addInterestsForm').submit();">Save changes</button>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>

@@ -19,7 +19,7 @@
                     <!-- Column -->
                     <div class="col-md-6 align-self-center text-center" data-aos="fade-down" data-aos-duration="1200">
                         <h1 class="title">{{$course->course_name}}</h1>
-                        <h6 class="subtitle op-8">{{$course->profile->course_description}}</h6> 
+                        <h6 class="subtitle op-8">{{($course->profile) ? $course->profile->course_description : ''}}</h6>
                         @if ($course->certified)
                             <span class="label label-success">CERTIFIED</span>
                         @else
@@ -48,7 +48,7 @@
                     <div class="col-lg-12">
                         <div class="text-box">
                             <h3 class="font-light"></h3>
-                            {{$course->profile->course_qualifications}}
+                            {{($course->profile != null)? $course->profile->course_qualifications: ''}}
                         </div>
                     </div>
                 </div>
@@ -56,8 +56,8 @@
                     <div class="col-lg-12">
                         <div class="text-box">
                             <ul style="list-style-type: circle;">
-                                <li><h3>Course Credits : {{$course->profile->course_credits}}</h3></li>
-                                <li><h3>Course Duration : {{$course->profile->course_duration}}</h3></li>
+                                <li><h3>Course Credits : {{($course->profile != null)? $course->profile->course_credits: ''}}</h3></li>
+                                <li><h3>Course Duration : {{($course->profile != null)? $course->profile->course_duration: ''}}</h3></li>
                             </ul>
                         </div>
                     </div>

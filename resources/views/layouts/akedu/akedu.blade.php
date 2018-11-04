@@ -148,20 +148,20 @@ $courses = \App\Models\Course\Course::all();
                                     @auth
                                         <li class="nav-item float-right"><a class="nav-link" href="{{route('home')}}"><i class="fa fa-comments"></i>Home</a></li>
                                         <li class="nav-item mt-4 float-right">
-                                            <a class="btn btn-rounded btn-dark" href="{{route('user.profile')}}"><i class="fa fa-user"></i>{{auth()->user()->name}}</a>
+                                            <a class="btn btn-rounded btn-info" href="{{route('user.profile')}}">
+                                                <i class="fa fa-user"></i> {{auth()->user()->name}}
+                                            </a>
                                         </li>
-                                        <li class="nav-item float-right">
-                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                                <a class="dropdown-item" href="{{ route('logout') }}"
-                                                   onclick="event.preventDefault();
+                                        <li class="nav-item mt-4 float-right">
+                                            <a class="btn btn-rounded btn-dark" href="{{ route('logout') }}"
+                                               onclick="event.preventDefault();
                                                          document.getElementById('logout-form').submit();">
-                                                    {{ __('Sign Out') }}
-                                                </a>
+                                                {{ __('Sign Out') }}
+                                            </a>
 
-                                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                                    @csrf
-                                                </form>
-                                            </div>
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                @csrf
+                                            </form>
                                         </li>
 
                                     @else
@@ -215,7 +215,7 @@ $courses = \App\Models\Course\Course::all();
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-3 col-md-6 m-b-30">
-                            <h5 class="m-b-20">Contacts</h5>
+                            <h5 class="m-b-20"></h5>
                             <p>Akedu </p>
                         </div>
 

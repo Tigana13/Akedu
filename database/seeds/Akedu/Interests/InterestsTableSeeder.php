@@ -6,6 +6,7 @@ class InterestsTableSeeder extends Seeder
 {
     protected $faker;
     protected $users;
+    protected $interests;
 
     public function __construct()
     {
@@ -19,12 +20,28 @@ class InterestsTableSeeder extends Seeder
      */
     public function run()
     {
-        for($x=0; $x<20; $x++){
+        $interests = [
+            'Animation', 'Astronomy', 'Criminology', 'Enterpreneurial Studies', 'Robotics technology', 'Zoology'
+        ];
+
+        foreach ($interests as $interest){
             \App\Models\Interests\Interests::create([
-                'user_id' => ($this->users->isNotEmpty()) ? $this->users->random()->id: 1,
-                'interest_name' => $this->faker->name,
+                'interest_name' => $interest,
                 'interest_icon' => $this->faker->imageUrl(200,200)
             ]);
         }
+
+        $this->interests = \App\Models\Interests\Interests::all();
+
+        foreach ($this->users as $user) {
+            for ($x=0; $x < 10; $x++){
+                \App\Models\Interests\Interestable::create([
+                    'interests_id' => $this->interests->random()->id,
+                    'interestables_id' => $user->id,
+                    'interestables_type' => \App\User::class
+                ]);
+            }
+        }
+
     }
 }

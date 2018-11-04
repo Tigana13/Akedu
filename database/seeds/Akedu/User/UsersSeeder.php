@@ -79,15 +79,12 @@ class UsersSeeder extends Seeder
 
     public function createInterests($user)
     {
-        $i = 0;
-        while ($i < 7){
-            \App\Models\User\UserInterests::create([
-                'user_id' => $user->id,
-                'interest_id' => $this->interests->random()->id,
-                'sub_interest_id' => $this->subinterests->random()->id
+        for ($x=0; $x < 10; $x++){
+            \App\Models\Interests\Interestable::create([
+                'interests_id' => $this->interests->random()->id,
+                'interestables_id' => $user->id,
+                'interestables_type' => \App\User::class
             ]);
-
-            $i++;
         }
     }
 }

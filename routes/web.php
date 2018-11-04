@@ -19,8 +19,14 @@ Route::group(['prefix' => 'admin'], function () {
 Auth::routes();
 
 Route::get('/', 'College\CollegeController@index')->name('home');
+//User
 Route::get('/user/profile', 'User\UserController@profile')->name('user.profile');
 Route::post('/user/profile/update', 'User\UserController@updateBio')->name('user.bio.update');
+Route::post('/user/interests/add', 'User\UserController@addInterests')->name('user.interests.add');
+
+//Internship && exit survey
+Route::get('/internship/exit_survey/show', 'User\UserController@showExitSurveyForm')->name('exit_survey.show');
+Route::post('/internship/exit_survey/submit', 'User\UserController@addExitSurvey')->name('exit_survey.submit');
 
 Route::get('/colleges', 'College\CollegeController@index')->name('colleges');
 Route::get('/colleges/{id}', 'College\CollegeController@show')->name('college.show');

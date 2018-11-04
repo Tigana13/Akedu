@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\ExitSurvey\ExitSurvey;
 use App\Models\Favorites\Favoritable;
 use App\Models\Favorites\Favorites;
 use App\Models\Interests\Interests;
@@ -33,7 +34,6 @@ class User extends \TCG\Voyager\Models\User
 
     public function toSearchableArray()
     {
-
         $array = ['name', 'email'];
 
         return $array;
@@ -62,7 +62,11 @@ class User extends \TCG\Voyager\Models\User
 
     public function interests()
     {
-        return $this->hasMany(Interests::class, 'user_id');
+        return $this->morphToMany(Interests::class, 'interestables');
     }
 
+    public function exitSurvey()
+    {
+        return $this->hasOne(ExitSurvey::class, 'user_id');
+    }
 }
