@@ -145,22 +145,22 @@ class UserController extends Controller
     public function addExitSurvey(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'professional_ethics' => 'required|integer|max:2|min:-1',
-            'communication_skills' => 'required|integer|max:2|min:-1',
+            'professional_ethics' => 'required|string',
+            'communication_skills' => 'required|string',
             'start_year' => 'required|date',
             'completion_year' => 'required|date',
-            'theory_prac_application' => 'required|integer|max:2|min:-1',
-            'current_field_trends' => 'required|integer|max:2|min:-1',
-            'written_communication' => 'required|integer|max:2|min:-1',
-            'critical_thinking' => 'required|integer|max:2|min:-1',
-            'team_member_functionality' => 'required|integer|max:2|min:-1',
-            'independent_learner' => 'required|integer|max:2|min:-1',
-            'further_education_career' => 'required|integer|max:2|min:-1',
-            'strong_leadership_skills' => 'required|integer|max:2|min:-1',
-            'acceptance_at_institution' => 'required|integer|max:2|min:-1',
-            'faculty_support' => 'required|integer|max:2|min:-1',
-            'return_for_social_activities' => 'required|integer|max:2|min:-1',
-            'employment_preparation' => 'required|integer|max:2|min:-1',
+            'theory_prac_application' => 'required|string',
+            'current_field_trends' => 'required|string',
+            'written_communication' => 'required|string',
+            'critical_thinking' => 'required|string',
+            'team_member_functionality' => 'required|string',
+            'independent_learner' => 'required|string',
+            'further_education_career' => 'required|string',
+            'strong_leadership_skills' => 'required|string',
+            'acceptance_at_institution' => 'required|string',
+            'faculty_support' => 'required|string',
+            'return_for_social_activities' => 'required|string',
+            'employment_preparation' => 'required|string',
         ]);
 
         if ($validator->fails()){

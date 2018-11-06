@@ -2,6 +2,9 @@
 
 namespace App\Models\ExitSurvey;
 
+use App\Models\College\College;
+use App\Models\Course\Course;
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class ExitSurvey extends Model
@@ -26,5 +29,27 @@ class ExitSurvey extends Model
         'employment_preparation_rating',
     ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function course()
+    {
+        return $this->belongsTo(Course::class, 'course_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function college()
+    {
+        return $this->belongsTo(College::class, 'college_id');
+    }
 }

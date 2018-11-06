@@ -13,7 +13,7 @@
         <!-- ============================================================== -->
         <!-- Static Slider 10  -->
         <!-- ============================================================== -->
-        <div class="banner-innerpage" style="background-image:url(); background-color: grey">
+        <div class="banner-innerpage" style="background-image:url('{{asset('images/pencils-1280558_1920.jpg')}}');">
             <div class="container">
                 <!-- Row  -->
                 <div class="row justify-content-center ">

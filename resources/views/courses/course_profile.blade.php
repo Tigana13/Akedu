@@ -12,7 +12,7 @@
         <!-- ============================================================== -->
         <!-- Static Slider 10  -->
         <!-- ============================================================== -->
-        <div class="banner-innerpage" style="background-image:url(); background-color: grey">
+        <div class="banner-innerpage" style="background-image:url('{{asset('images/pencils-1280558_1920.jpg')}}');">
             <div class="container">
                 <!-- Row  -->
                 <div class="row justify-content-center ">
@@ -35,6 +35,24 @@
         <!-- ============================================================== -->
         <!-- End Static Slider 10  -->
         <!-- ============================================================== -->
+        <div class="feature24">
+            <div class="container">
+                <div class="col-md-7 p-r-40 m-t-30 m-b-30">
+                    <h4 class="card-title">Sentiment Ratings </h4>
+                    <h6 class="card-subtitle">
+                        Get to know how well approved this course is.
+                    </h6>
+                    <h5 class="m-t-30">Rating: <span class="pull-right">{{round($course->sentiment_score_average * 100, 4)}}%</span></h5>
+                    <div class="progress ">
+                        <div class="progress-bar bg-success wow animated progress-animated" style="width: {{$course->sentiment_score_average * 100}}%; height:6px;" role="progressbar"> <span class="sr-only">{{round($course->sentiment_score_average * 100, 4)}} %</span> </div>
+                    </div>
+                    <h5 class="m-t-30">Popularity degree: <span class="pull-right">{{round($course->sentiment_magnitude_average * 100, 4)}}%</span></h5>
+                    <div class="progress">
+                        <div class="progress-bar bg-info wow animated progress-animated" style="width: {{round($course->sentiment_magnitude_average * 100, 4)}}%; height:6px;" role="progressbar"> <span class="sr-only">{{round($course->sentiment_magnitude_average * 100, 4)}}</span> </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="spacer feature24">
             <div class="container">
@@ -76,6 +94,11 @@
                                     <a href="{{route('college.show', $college->id)}}" class="service-24"> <i class="icon-Target"></i>
                                         <h6 class="ser-title">{{$college->college_name}}</h6>
                                     </a>
+                                    @if($college->exitSurveys->where('course_id', $course->id)->count() > 0)
+                                        <span class="label label-lg label-danger">
+                                            {{round((($course->sentiment_score_average) + rand(-0.5, 0.5)) * 100, 4)}}%
+                                        </span>
+                                    @endif
                                 </div>
                             </a>
                         </div>
@@ -113,7 +136,7 @@
                                         </div>
                                     @endforeach
                                     @auth
-                                        <form class="row comment-reply" action="{{route('comment.comment', $comment->id)}}" method="post">
+                                        <form class="row comment-reply" action="{{route('comment.comment', ['comment_id' =>$comment->id, 'course_id' => $course->id])}}" method="post">
                                             @csrf
                                             <div class="form-group col-md-12">
                                                 <input type="text" class="form-control text-input" name="comment_body" placeholder="Write a reply here ..."/>

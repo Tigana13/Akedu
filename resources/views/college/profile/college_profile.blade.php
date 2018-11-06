@@ -12,7 +12,7 @@
         <!-- ============================================================== -->
         <!-- Static Slider 10  -->
         <!-- ============================================================== -->
-        <div class="banner-innerpage" style="background-image:url('{{asset('storage/colleges/'.$college->college_name.'/'.$college->bannerimages->random()->image)}}'); background-color: grey">
+        <div class="banner-innerpage" style="background-image:url('{{asset('images/pencils-1280558_1920.jpg')}}');">
             <div class="container">
                 <!-- Row  -->
                 <div class="row justify-content-center ">
@@ -28,7 +28,7 @@
         <!-- End Static Slider 10  -->
         <!-- ============================================================== -->
 
-        <div class="spacer feature24">
+        <div class="feature24">
             <div class="container">
                 <!-- Row -->
                 <div class="row justify-content-center">
@@ -56,7 +56,7 @@
             </div>
         </div>
 
-        <div class="spacer feature24">
+        <div class="feature24">
             <div class="container">
                 <!-- Row -->
                 <div class="row justify-content-center">
@@ -98,42 +98,42 @@
         <!-- ============================================================== -->
         <!-- College Portfolio-->
         <!-- ============================================================== -->
-        <div class="spacer feature2" id="work">
-            <div class="container">
-                <div class="row m-t-40">
-                    <div class="col-lg-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">College Gallery</h4>
-                                <h6 class="card-subtitle"></h6>
-                                <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
-                                    <div class="carousel-inner" role="listbox">
-                                        <div class="carousel-item active"> <img class="img-responsive" src="{{asset('storage/colleges/'.$college->college_name.'/'.$college->images->random()->image)}}" alt="{{asset('storage/colleges/'.$college->college_name.'/'.$college->images->random()->image)}}"> </div>
-                                        <div class="carousel-item"> <img class="img-responsive" src="{{asset('storage/colleges/'.$college->college_name.'/'.$college->images->random()->image)}}" alt="{{asset('storage/colleges/'.$college->college_name.'/'.$college->images->random()->image)}}"> </div>
-                                        <div class="carousel-item"> <img class="img-responsive" src="{{asset('storage/colleges/'.$college->college_name.'/'.$college->images->random()->image)}}" alt="{{asset('storage/colleges/'.$college->college_name.'/'.$college->images->random()->image)}}"> </div>
-                                    </div>
-                                </div>
-                                <div class="highlight"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- ============================================================== -->
-                <!-- Contact 1  -->
-                <!-- ============================================================== -->
-                <div class="contact1">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h4 class="title">Branch Locator</h4>
+        {{--<div class="feature2" id="work">--}}
+            {{--<div class="container">--}}
+                {{--<div class="row m-t-40">--}}
+                    {{--<div class="col-lg-12">--}}
+                        {{--<div class="card">--}}
+                            {{--<div class="card-body">--}}
+                                {{--<h4 class="card-title">College Gallery</h4>--}}
+                                {{--<h6 class="card-subtitle"></h6>--}}
+                                {{--<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">--}}
+                                    {{--<div class="carousel-inner" role="listbox">--}}
+                                        {{--<div class="carousel-item active"> <img class="img-responsive" src="{{asset('storage/colleges/'.$college->college_name.'/'.$college->images->random()->image)}}" alt="{{asset('storage/colleges/'.$college->college_name.'/'.$college->images->random()->image)}}"> </div>--}}
+                                        {{--<div class="carousel-item"> <img class="img-responsive" src="{{asset('storage/colleges/'.$college->college_name.'/'.$college->images->random()->image)}}" alt="{{asset('storage/colleges/'.$college->college_name.'/'.$college->images->random()->image)}}"> </div>--}}
+                                        {{--<div class="carousel-item"> <img class="img-responsive" src="{{asset('storage/colleges/'.$college->college_name.'/'.$college->images->random()->image)}}" alt="{{asset('storage/colleges/'.$college->college_name.'/'.$college->images->random()->image)}}"> </div>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                                {{--<div class="highlight"></div>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+                {{--<!-- ============================================================== -->--}}
+                {{--<!-- Contact 1  -->--}}
+                {{--<!-- ============================================================== -->--}}
+                {{--<div class="contact1">--}}
+                    {{--<div class="row">--}}
+                        {{--<div class="col-md-12">--}}
+                            {{--<h4 class="title">Branch Locator</h4>--}}
 
-                        </div>
-                    </div>
-                </div>
-                <!-- ============================================================== -->
-                <!-- End Contact 1  -->
-                <!-- ============================================================== -->
-            </div>
-        </div>
+                        {{--</div>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+                {{--<!-- ============================================================== -->--}}
+                {{--<!-- End Contact 1  -->--}}
+                {{--<!-- ============================================================== -->--}}
+            {{--</div>--}}
+        {{--</div>--}}
         <!-- ============================================================== -->
         <!-- End College portfolio -->
         <!-- ============================================================== -->

@@ -10,7 +10,7 @@
         <!-- ============================================================== -->
         <!-- Static Slider 10  -->
         <!-- ============================================================== -->
-        <div class="banner-innerpage" style="background-image:url({{asset('images/stuff/god_of_war_kratos_sony_santa_monica_110295_3840x2160.jpg')}})">
+        <div class="banner-innerpage" style="background-image:url({{asset('images/pencils-1280558_1920.jpg')}})">
             <div class="container">
                 <!-- Row  -->
                 <div class="row justify-content-center ">

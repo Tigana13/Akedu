@@ -201,19 +201,6 @@
             </div>
         </div>
 
-        {{--@if(\Carbon\Carbon::today() > \Carbon\Carbon::parse(auth()->user()->profile->completion_year) || auth()->user()->profile->college->id == null)--}}
-            <div class="feature24 mb-lg-5">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-7">
-                            <h2 class="title">Looking to join college?</h2>
-                            <p>If you are looking to join college, we can offer suggestions on courses and colleges.</p>
-                        </div>
-                    </div>
-                    <a href="#" class="btn btn-success">Get recommendation</a>
-                </div>
-            </div>
-        {{--@endif--}}
         <div class="feature24 mb-lg-5">
             <div class="container">
                 <div class="row">

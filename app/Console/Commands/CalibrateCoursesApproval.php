@@ -61,7 +61,6 @@ class CalibrateCoursesApproval extends Command
     public function handle()
     {
         Course::chunk(10, function ($courses){
-
             foreach ($courses as $course){
                 $sentiment_scores = array();
                 $magnitude_scores = array();
@@ -76,6 +75,15 @@ class CalibrateCoursesApproval extends Command
                     }
                     catch (Google\Cloud\Core\Exception\BadRequestException $exception) {
                         continue;
+                    }
+
+                    foreach ($course->comments as $reply) {
+                        $sentiment = $this->language_kit->analyzeSentiment($reply->body);
+                        $magnitude_score = $sentiment->sentiment()['magnitude'];
+                        $sentiment_score = $sentiment->sentiment()['score'];
+
+                        array_push($sentiment_scores, $sentiment_score);
+                        array_push($magnitude_scores, $magnitude_score);
                     }
                 }
 

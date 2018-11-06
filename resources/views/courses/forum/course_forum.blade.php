@@ -13,7 +13,7 @@
         <!-- ============================================================== -->
         <!-- Static Slider 10  -->
         <!-- ============================================================== -->
-        <div class="banner-innerpage" style="background-image:url(); background-color: grey">
+        <div class="banner-innerpage" style="background-image:url('{{asset('images/pencils-1280558_1920.jpg')}}');">
             <div class="container">
                 <!-- Row  -->
                 <div class="row justify-content-center ">
@@ -28,7 +28,6 @@
                             <span class="label label-danger">NOT CERTIFIED</span>
                         @endif
                         <br><br><br>
-                        <div class="progress-bar bg-success" style="width: 75%; height:15px;" role="progressbar">75%</div>
                     </div>
                     <!-- Column -->
                 </div>

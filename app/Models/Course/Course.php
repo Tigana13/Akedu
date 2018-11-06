@@ -5,9 +5,11 @@ namespace App\Models\Course;
 use App\Models\College\College;
 use App\Models\Comments\Comments;
 use App\Models\Course\Profile\CourseProfile;
+use App\Models\ExitSurvey\ExitSurvey;
 use App\Models\Intakes\Intakes;
 use App\Models\Threads\Threads;
 use App\Models\Topics\Topics;
+use App\Models\Views\Views;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Scout\Searchable;
@@ -66,7 +68,12 @@ class Course extends Model
 
     public function views()
     {
-        return $this->morphMany($this, 'viewable');
+        return $this->morphMany(Views::class, 'viewable');
+    }
+
+    public function exitSurveys()
+    {
+        return $this->hasMany(ExitSurvey::class, 'course_id');
     }
 
 }

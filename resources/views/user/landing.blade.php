@@ -10,15 +10,14 @@
         <!-- ============================================================== -->
         <!-- Static Slider 10  -->
         <!-- ============================================================== -->
-        <div class="banner-innerpage" style="background-image:url({{asset('images/stuff/magic_ball_library_columns_castle_63093_3840x2160.jpg')}})">
+        <div class="banner-innerpage" style="background-image:url({{asset('images/pencils-1280558_1920.jpg')}})">
             <div class="container">
                 <!-- Row  -->
                 <div class="row justify-content-center ">
                     <!-- Column -->
                     <div class="col-md-6 align-self-center text-center" data-aos="fade-down" data-aos-duration="1200">
-                        <h1 class="title">Colleges Listing</h1>
-                        <h6 class="subtitle op-8"></h6>
-                        <div class="progress-bar bg-success" style="width: 75%; height:15px;" role="progressbar">75%</div>
+                        <h1 class="title">Akedu Student Connect</h1>
+                        <h6 class="subtitle op-8">Connecting you to courses we know about.</h6>
                     </div>
                     <!-- Column -->
                 </div>
@@ -39,9 +38,9 @@
                         @csrf
                         <div class="row text-center justify-content-center">
                             <div class="col-md-7 col-lg-5 align-self-center" data-aos="fade-right" data-aos-duration="1500">
-                                <h6 class="subtitle op-8">Search for colleges</h6>
+                                <h4>Colleges Listing</h4>
                                 <div class="m-t-40">
-                                    <h2 class="title"></h2>
+                                    <p>You can search for a college listed below</p>
                                     <input type="text" name="search_query" placeholder="..." class="font-16" />
                                     <input type="submit" value="Search" class="bg-success-gradiant font-semibold font-16 btn-rounded text-uppercase text-white text-center" />
                                 </div>
@@ -53,7 +52,7 @@
                     @foreach ($colleges as $college)
                         <div class="col-md-4">
                             <div class="card">
-                                <a href="{{route('college.show', $college->id)}}" class="img-ho" title="{{$college->college_name}}"><img class="card-img-top" src="{{$college->images->random()->image}}" alt="{{$college->images->random()->image}}" /></a>
+                                <a href="{{route('college.show', $college->id)}}" title="{{$college->college_name}}"><img class="card-img-top" src="{{$college->images->random()->image}}" alt="{{$college->images->random()->image}}" style="opacity: 0.5;"/></a>
                                 <div class="">
                                     <h5 class="title">{{$college->college_name}}</h5>
                                 </div>

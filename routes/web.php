@@ -43,6 +43,6 @@ Route::post('/courses/thread/search', 'Courses\CoursesController@searchThreads')
 
 
 
-Route::post('/comments/comment/{comment_id}', 'Comments\CommentsController@addCommentComment')->name('comment.comment');
+Route::post('/comments/comment/{comment_id}/{course_id?}', 'Comments\CommentsController@addCommentComment')->name('comment.comment');
 
 Route::view('/{path?}', 'app');

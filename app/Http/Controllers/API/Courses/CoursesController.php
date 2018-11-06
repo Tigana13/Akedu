@@ -6,6 +6,7 @@ use App\Http\Resources\Courses\CoursesResource;
 use App\Models\Comments\Comments;
 use App\Models\Course\Course;
 use App\Models\Threads\Threads;
+use App\Models\Views\Views;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
@@ -58,6 +59,13 @@ class CoursesController extends Controller
     public function show($id)
     {
         $course = Course::with(['colleges','intakes'])->findOrFail($id);
+
+        Views::create([
+            'user_id' => (Auth::check()) ? Auth::id() : null,
+            'view_medium' => 'mobile',
+            'viewable_type' => Course::class,
+            'viewable_id' => $course->id
+        ]);
 
         return new CoursesResource($course);
     }
@@ -121,7 +129,7 @@ class CoursesController extends Controller
     public function addCourseComment(Request $request, $course_id)
     {
         $validator = Validator::make($request->all(), [
-            'comment_body' => 'required|string|max:180'
+            'comment_body' => 'required|string|max:255'
         ]);
 
         if ($validator->fails()){

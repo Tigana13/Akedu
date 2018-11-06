@@ -5,12 +5,17 @@ namespace App\Http\Controllers\Courses;
 use App\Models\Comments\Comments;
 use App\Models\Course\Course;
 use App\Models\Threads\Threads;
+use App\Models\Views\Views;
+use App\Traits\RecalibratesCourseRatings;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class CoursesController extends Controller
 {
+    use RecalibratesCourseRatings;
+
     /**
      * Display the specified course.
      *
@@ -20,6 +25,14 @@ class CoursesController extends Controller
     public function show($id)
     {
         $course = Course::findOrFail($id);
+
+        Views::create([
+            'user_id' => (Auth::check()) ? Auth::id() : null,
+            'view_medium' => 'web',
+            'viewable_type' => Course::class,
+            'viewable_id' => $course->id
+        ]);
+
         return view('courses.course_profile', compact('course'));
     }
 
@@ -50,7 +63,7 @@ class CoursesController extends Controller
     public function addCourseComment(Request $request, $course_id)
     {
         $validator = Validator::make($request->all(), [
-            'comment_body' => 'required|string|max:180'
+            'comment_body' => 'required|string|max:1200'
         ]);
 
         if ($validator->fails()){
@@ -64,6 +77,8 @@ class CoursesController extends Controller
         $comment->body = $request->comment_body;
 
         $course->comments()->save($comment);
+
+        $this->recalibrateCourseRating($course, $comment);
 
         return back()->with('success','Comment added successfully');
 

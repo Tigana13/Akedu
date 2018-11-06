@@ -4,8 +4,10 @@ namespace App\Http\Controllers\API\Colleges;
 
 use App\Http\Resources\Colleges\CollegesResource;
 use App\Models\College\College;
+use App\Models\Views\Views;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -73,6 +75,13 @@ class CollegesController extends Controller
     public function show($id)
     {
         $college = College::findOrFail($id);
+
+        Views::create([
+            'user_id' => (Auth::check()) ? Auth::id() : null,
+            'view_medium' => 'web',
+            'viewable_type' => College::class,
+            'viewable_id' => $college->id
+        ]);
 
         return new CollegesResource($college);
     }

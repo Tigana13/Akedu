@@ -5,6 +5,7 @@ namespace App\Models\College;
 use App\Models\College\Profile\CollegeProfile;
 use App\Models\Comments\Comments;
 use App\Models\Course\Course;
+use App\Models\ExitSurvey\ExitSurvey;
 use App\Models\Facility\Facility;
 use App\Models\Image\Image;
 use App\Models\Intakes\Intakes;
@@ -91,4 +92,8 @@ class College extends Authenticatable
         return $this->morphMany(Comments::class, 'commentable');
     }
 
+    public function exitSurveys()
+    {
+        return $this->hasMany(ExitSurvey::class, 'college_id');
+    }
 }
