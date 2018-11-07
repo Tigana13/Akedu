@@ -21,7 +21,7 @@ class CoursesController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     * @return CoursesCollection
      */
     public function index()
     {
