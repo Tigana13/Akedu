@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API\Courses;
 
+use App\Http\Resources\Courses\CoursesCollection;
 use App\Http\Resources\Courses\CoursesResource;
 use App\Models\Comments\Comments;
 use App\Models\Course\Course;
@@ -25,7 +26,7 @@ class CoursesController extends Controller
     public function index()
     {
         $courses = Course::with(['colleges','intakes'])->paginate(10);
-        return CoursesResource::collection($courses);
+        return new CoursesCollection(CoursesResource::collection($courses));
     }
 
 
