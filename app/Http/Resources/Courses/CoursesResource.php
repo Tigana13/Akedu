@@ -3,6 +3,7 @@
 namespace App\Http\Resources\Courses;
 
 use App\Http\Resources\Colleges\CollegesResource;
+use App\Http\Resources\Comments\CommentsResource;
 use App\Http\Resources\Intakes\IntakesResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -37,6 +38,7 @@ class CoursesResource extends JsonResource
             'social_activities_rating' => ($this->exitSurveys->isNotEmpty())? $this->exitSurveys->avg('return_for_social_activities_rating_score'): 0,
             'employment_preparation_rating' => ($this->exitSurveys->isNotEmpty())? $this->exitSurveys->avg('employment_preparation_rating_score'): 0,
             'colleges' => CollegesResource::collection($this->whenLoaded('colleges')),
+            'comments' => CommentsResource::collection($this->whenLoaded('comments')),
             'intakes' => IntakesResource::collection($this->whenLoaded('intakes')),
         ];
     }

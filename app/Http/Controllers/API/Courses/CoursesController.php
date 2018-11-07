@@ -10,6 +10,7 @@ use App\Models\Threads\Threads;
 use App\Models\Views\Views;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class CoursesController extends Controller
@@ -25,7 +26,7 @@ class CoursesController extends Controller
      */
     public function index()
     {
-        $courses = Course::with(['colleges','intakes'])->paginate(10);
+        $courses = Course::with(['colleges','intakes', 'comments'])->paginate(10);
         return new CoursesCollection(CoursesResource::collection($courses));
     }
 
@@ -59,7 +60,7 @@ class CoursesController extends Controller
      */
     public function show($id)
     {
-        $course = Course::with(['colleges','intakes'])->findOrFail($id);
+        $course = Course::with(['colleges','intakes', 'comments'])->findOrFail($id);
 
         Views::create([
             'user_id' => (Auth::check()) ? Auth::id() : null,
