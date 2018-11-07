@@ -46,7 +46,8 @@ class RegisterController extends Controller
         $token->save();
 
         return response()->json([
-            'user' => $new_user,
+            'name' => $new_user->name,
+            'email' => $new_user->email,
             'access_token' => $tokenResult->accessToken,
             'token_type' => 'Bearer',
             'expires_at' => Carbon::parse(
