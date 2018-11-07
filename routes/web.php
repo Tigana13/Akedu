@@ -16,6 +16,15 @@ Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
 
+Route::prefix('users')->group(function () {
+    //Parameters: Register: name, password, password_confirmation,
+    //name,email,password
+    Route::post('/register', 'API\Auth\User\RegisterController@register');
+    //email, password, remember me (boolean)
+    Route::post('/login', 'API\Auth\User\LoginController@login');
+    Route::post('/logout', 'API\Auth\User\LoginController@logout');
+});
+
 Auth::routes();
 
 Route::get('/', 'College\CollegeController@index')->name('home');
