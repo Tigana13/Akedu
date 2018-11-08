@@ -126,7 +126,6 @@ class CoursesController extends Controller
     public function showCourseThread($course_id, $thread_id)
     {
         $thread = Threads::findOrFail($thread_id);
-
         $course = Course::findOrFail($course_id);
 
         return view('courses.forum.thread.course_thread', compact('thread', 'course'));

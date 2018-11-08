@@ -8,6 +8,7 @@ use App\Models\Comments\Comments;
 use App\Models\Course\Course;
 use App\Models\Threads\Threads;
 use App\Models\Views\Views;
+use App\Traits\RecalibratesCourseRatings;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -15,6 +16,8 @@ use Illuminate\Support\Facades\Validator;
 
 class CoursesController extends Controller
 {
+    use  RecalibratesCourseRatings;
+
     public function __construct()
     {
 //        $this->middleware('auth:api');
@@ -145,6 +148,8 @@ class CoursesController extends Controller
         $comment->body = $request->comment_body;
 
         $course->comments()->save($comment);
+
+        $this->recalibrateCourseRating($course, $comment);
 
         return response()->json(['message' => 'Comment added successfully', 'comment' => $comment], 200);
 

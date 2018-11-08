@@ -24,7 +24,7 @@ class CollegesController extends Controller
      */
     public function index()
     {
-        $colleges = College::with(['courses', 'facilities', 'intakes', 'images', 'locations.country'])->get();
+        $colleges = College::with(['courses', 'facilities', 'intakes', 'images', 'locations.country', 'courses.comments'])->get();
 
         return CollegesResource::collection($colleges);
     }
