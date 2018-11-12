@@ -93,8 +93,8 @@ class CoursesController extends Controller
     public function createCourseThread(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'thread_subject' => 'required|string|max:180',
             'thread_title' => 'required|string|max:180',
+            'thread_description' => 'required|string|max:180',
             'course_id' => 'required|integer'
         ]);
 
@@ -106,7 +106,8 @@ class CoursesController extends Controller
 
         $thread = new Threads();
         $thread->thread = $request->thread_title;
-        $thread->subject = $request->thread_subject;
+        $thread->subject = $request->thread_description;
+        $thread->user_id = Auth::id();
         $thread->threadable_type = Course::class;
         $thread->threadable_id = $course->id;
 

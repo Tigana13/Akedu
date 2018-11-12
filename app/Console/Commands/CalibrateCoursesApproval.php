@@ -3,20 +3,8 @@
 namespace App\Console\Commands;
 
 use App\Models\Course\Course;
-use Google\Auth\Credentials\AppIdentityCredentials;
 use Google\Cloud\Core\ServiceBuilder;
-use Google\Cloud\Language\LanguageClient;
-use Google\Cloud\Language\V1beta2\LanguageServiceClient;
-use Google_Client;
 use Illuminate\Console\Command;
-use Illuminate\Http\Request;
-use Phpml\Classification\NaiveBayes;
-use Phpml\CrossValidation\StratifiedRandomSplit;
-use Phpml\Dataset\ArrayDataset;
-use Phpml\Dataset\CsvDataset;
-use Phpml\FeatureExtraction\TfIdfTransformer;
-use Phpml\FeatureExtraction\TokenCountVectorizer;
-use Phpml\Tokenization\WordTokenizer;
 
 class CalibrateCoursesApproval extends Command
 {

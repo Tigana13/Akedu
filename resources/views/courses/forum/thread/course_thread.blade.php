@@ -18,7 +18,7 @@
                 <div class="row justify-content-center ">
                     <!-- Column -->
                     <div class="col-md-6 align-self-center text-center" data-aos="fade-down" data-aos-duration="1200">
-                        <h1 class="title">{{$thread->subject}}</h1>
+                        <h1 class="title">{{$thread->thread}}</h1>
                         <h3 >{{$course->course_name}}</h3>
                         <br><br><br>
                     </div>
@@ -35,7 +35,9 @@
                 <div class="row justify-content-center">
                     <div class="col-md-7 text-center">
                         <h2 class="title">Description</h2>
-                        <h6 class="subtitle">{{$thread->thread}}</h6>
+                        <h6 class="subtitle">{{$thread->subject}}</h6>
+                        <p><b>Started by:</b> @if($thread->user != null)<span class="label label-success">{{$thread->user->name}}</span></p> @endif
+                        <p>Created: <span class="label label-warning">{{$thread->created_at->diffForHumans()}}</span></p>
                         @include('partials.session_alerts')
                     </div>
                 </div>

@@ -3,6 +3,7 @@
 namespace App\Console;
 
 use App\Console\Commands\CalibrateCoursesApproval;
+use App\Console\Commands\Course\ExitSurveyCalibrateSingle;
 use App\Console\Commands\Course\ExitSurveyRecalibrate;
 use App\Console\Commands\Course\RecalibrateSentimentRatings;
 use App\Console\Commands\RecommendCourse;
@@ -21,7 +22,8 @@ class Kernel extends ConsoleKernel
         CalibrateCoursesApproval::class,
         Vectorize::class,
         RecalibrateSentimentRatings::class,
-        ExitSurveyRecalibrate::class
+        ExitSurveyRecalibrate::class,
+        ExitSurveyCalibrateSingle::class
     ];
 
     /**

@@ -202,7 +202,7 @@
                                 <input type="text" class="form-control" required name="thread_title" placeholder="Thread title"/>
                             </div>
                             <div class="form-group col-md-12">
-                                <textarea type="text" class="form-control" rows="8" name="thread_subject" placeholder="Description (optional)"></textarea>
+                                <textarea type="text" class="form-control" rows="8" name="thread_description" placeholder="Description "></textarea>
                             </div>
 
                         </form>

@@ -11,6 +11,7 @@ use App\Models\User\UserProfile;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
@@ -188,6 +189,8 @@ class UserController extends Controller
             'return_for_social_activities_rating' => $request->return_for_social_activities,
             'employment_preparation_rating' => $request->employment_preparation,
         ]);
+
+        Artisan::call('course:calibrate_sentiments');
 
         return redirect(route('user.profile'))->with('success', 'Your exit survey was successfully submitted. Thank you');
     }
