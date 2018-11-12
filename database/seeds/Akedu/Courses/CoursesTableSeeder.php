@@ -8,6 +8,10 @@ class CoursesTableSeeder extends Seeder
     protected $colleges;
     protected $intakes;
     protected $coursable_type;
+    protected $course_names = [
+        'Biology', 'Chemistry', 'Physics', 'Engineering', 'Environmental Science', 'Macroeconomics',
+        'Microeconomics', 'Algebra-Based', 'Business Math'
+    ];
 
     public function __construct()
     {
@@ -27,9 +31,9 @@ class CoursesTableSeeder extends Seeder
     {
         $i = 0;
 
-        while ($i < 30){
+        while ($i < 10){
             $course = \App\Models\Course\Course::create([
-                'course_name' => ((rand(0,1)) ? 'Degree in ': 'Diploma in ').$this->_faker->word,
+                'course_name' => ((rand(0,1)) ? 'Degree in ': 'Diploma in ').collect($this->course_names)->random(),
                 'course_intake' => $this->intakes->random()->id,
                 'active' => $this->_faker->boolean,
                 'certified' => $this->_faker->boolean
@@ -37,7 +41,7 @@ class CoursesTableSeeder extends Seeder
 
             $course_profile = new \App\Models\Course\Profile\CourseProfile([
                 'course_id' => $course->id,
-                'course_description' => $this->_faker->text,
+                'course_description' => 'Sample Description. \n I will describe how many of these seemingly esoteric topics touch on your everyday life and have led to most of the technological developments of the past century. Your view of the world will never be the same!',
                 'course_credits' => $this->_faker->numberBetween(1,5),
                 'course_qualifications' => $this->_faker->text,
                 'course_duration' => $this->_faker->numberBetween(1,6)
